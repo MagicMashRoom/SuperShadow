@@ -1,4 +1,4 @@
-package com.ldfeng.fuckshadow;
+package com.ldfeng.supershadow;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

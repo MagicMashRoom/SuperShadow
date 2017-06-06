@@ -13,7 +13,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 
-import com.ldfeng.shadow.base.CrazyShadowAttr;
+import com.ldfeng.shadow.base.ShadowAttr;
 
 /**
  * Created by hitomi on 2016/10/17.
@@ -36,9 +36,9 @@ public class RoundShadowDrawable extends Drawable {
     private int[] shadowColors;
     private boolean boundsHasChanged = true;
     private boolean addPaddingForCorners = true;
-    private CrazyShadowAttr attr;
+    private ShadowAttr attr;
 
-    public RoundShadowDrawable(CrazyShadowAttr attr) {
+    public RoundShadowDrawable(ShadowAttr attr) {
         this.attr = attr;
         this.shadowColors = attr.getColors();
         contentPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);

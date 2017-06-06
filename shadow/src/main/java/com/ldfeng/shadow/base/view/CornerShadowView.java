@@ -9,7 +9,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.view.View;
 
-import com.ldfeng.shadow.base.CrazyShadowDirection;
+import com.ldfeng.shadow.base.ShadowDirection;
 
 /**
  * Created by hitomi on 2016/10/18.
@@ -88,18 +88,18 @@ public class CornerShadowView extends View {
         this.shadowSize = shadowSize;
     }
 
-    public void setDirection(@CrazyShadowDirection int direction) {
+    public void setDirection(@ShadowDirection int direction) {
         switch (direction) {
-            case CrazyShadowDirection.LEFT_TOP:
+            case ShadowDirection.LEFT_TOP:
                 degrees = 0;
                 break;
-            case CrazyShadowDirection.TOP_RIGHT:
+            case ShadowDirection.TOP_RIGHT:
                 degrees = 90;
                 break;
-            case CrazyShadowDirection.RIGHT_BOTTOM:
+            case ShadowDirection.RIGHT_BOTTOM:
                 degrees = 180;
                 break;
-            case CrazyShadowDirection.BOTTOM_LEFT:
+            case ShadowDirection.BOTTOM_LEFT:
                 degrees = 270;
                 break;
             default:
@@ -117,7 +117,7 @@ public class CornerShadowView extends View {
 
         private float shadowSize;
 
-        @CrazyShadowDirection
+        @ShadowDirection
         private int direction;
 
         public Builder setContext(Context context) {
@@ -141,7 +141,7 @@ public class CornerShadowView extends View {
         }
 
 
-        public Builder setDirection(@CrazyShadowDirection int direction) {
+        public Builder setDirection(@ShadowDirection int direction) {
             this.direction = direction;
             return this;
         }

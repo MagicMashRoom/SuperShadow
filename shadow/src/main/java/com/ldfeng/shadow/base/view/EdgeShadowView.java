@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.view.View;
 
-import com.ldfeng.shadow.base.CrazyShadowDirection;
+import com.ldfeng.shadow.base.ShadowDirection;
 
 /**
  * Created by hitomi on 2016/10/17.
@@ -24,7 +24,7 @@ public class EdgeShadowView extends View {
 
     private float cornerRadius;
 
-    @CrazyShadowDirection
+    @ShadowDirection
     private int direction;
 
     private EdgeShadowView(Context context) {
@@ -34,7 +34,7 @@ public class EdgeShadowView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int measureWidth, measureHeight;
-        if (direction == CrazyShadowDirection.LEFT || direction == CrazyShadowDirection.RIGHT) {
+        if (direction == ShadowDirection.LEFT || direction == ShadowDirection.RIGHT) {
             measureWidth = Math.round(shadowRadius);
             measureHeight = Math.round(shadowSize);
         } else {
@@ -48,18 +48,18 @@ public class EdgeShadowView extends View {
     protected void onDraw(Canvas canvas) {
         canvas.save();
         switch (direction) {
-            case CrazyShadowDirection.TOP:
+            case ShadowDirection.TOP:
                 canvas.translate(0, cornerRadius + shadowRadius);
                 break;
-            case CrazyShadowDirection.RIGHT:
+            case ShadowDirection.RIGHT:
                 canvas.translate(-cornerRadius, 0);
                 canvas.rotate(90);
                 break;
-            case CrazyShadowDirection.BOTTOM:
+            case ShadowDirection.BOTTOM:
                 canvas.translate(shadowSize, -cornerRadius);
                 canvas.rotate(180);
                 break;
-            case CrazyShadowDirection.LEFT:
+            case ShadowDirection.LEFT:
                 canvas.translate(cornerRadius + shadowRadius, shadowSize);
                 canvas.rotate(270f);
                 break;
@@ -93,7 +93,7 @@ public class EdgeShadowView extends View {
         this.shadowSize = shadowSize;
     }
 
-    public void setDirection(@CrazyShadowDirection int direction) {
+    public void setDirection(@ShadowDirection int direction) {
         this.direction = direction;
     }
 
@@ -109,7 +109,7 @@ public class EdgeShadowView extends View {
 
         private float cornerRadius;
 
-        @CrazyShadowDirection
+        @ShadowDirection
         private int direction;
 
         public Builder setContext(Context context) {
@@ -137,7 +137,7 @@ public class EdgeShadowView extends View {
             return this;
         }
 
-        public Builder setDirection(@CrazyShadowDirection int direction) {
+        public Builder setDirection(@ShadowDirection int direction) {
             this.direction = direction;
             return this;
         }
