@@ -3,7 +3,6 @@ package com.ldfeng.supershadow;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.ldfeng.shadow.SuperShadow;
@@ -118,9 +117,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initShadow() {
         titleCrazyShadow = new SuperShadow.Builder()
                 .setContext(this)
-                .setDirection(ShadowDirection.LEFT_TOP_RIGHT)
-                .setShadowRadius(dip2Px(4))
-                .setCorner(dip2Px(2))
+                .setDirection(ShadowDirection.ALL)
+                .setShadowSize(dip2Px(12))
+                .setCorner(dip2Px(0))
                 .setBaseShadowColor(Color.parseColor("#ff4444"))
                 .setImpl(SuperShadow.DRAW_RENDERER)
                 .action(titleView);
@@ -128,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        drawCrazyShadow0 = new SuperShadow.Builder()
 //                .setContext(this)
 //                .setDirection(ShadowDirection.ALL)
-//                .setShadowRadius(dip2Px(12))
+//                .setShadowSize(dip2Px(12))
 //                .setBaseShadowColor(Color.RED)
 //                .setImpl(SuperShadow.DRAW_RENDERER)
 //                .action(drawView0);
@@ -136,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        drawCrazyShadow1 = new SuperShadow.Builder()
 //                .setContext(this)
 //                .setDirection(ShadowDirection.ALL)
-//                .setShadowRadius(dip2Px(3))
+//                .setShadowSize(dip2Px(3))
 //                .setCorner(dip2Px(5))
 //                .setBackground(Color.parseColor("#96a993"))
 //                .setImpl(SuperShadow.DRAW_RENDERER)
@@ -145,14 +144,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        wrapCrazyShadow0 = new SuperShadow.Builder()
 //                .setContext(this)
 //                .setDirection(ShadowDirection.ALL)
-//                .setShadowRadius(dip2Px(3))
+//                .setShadowSize(dip2Px(3))
 //                .setImpl(SuperShadow.WRAP_RENDERER)
 //                .action(wrapView0);
 //
 //        wrapCrazyShadow1 = new SuperShadow.Builder()
 //                .setContext(this)
 //                .setDirection(ShadowDirection.ALL)
-//                .setShadowRadius(dip2Px(5))
+//                .setShadowSize(dip2Px(5))
 //                .setCorner(dip2Px(8))
 //                .setImpl(SuperShadow.WRAP_RENDERER)
 //                .action(wrapView1);
@@ -160,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        shadowCrazyShadow0 = new SuperShadow.Builder()
 //                .setContext(this)
 //                .setDirection(ShadowDirection.ALL)
-//                .setShadowRadius(dip2Px(4))
+//                .setShadowSize(dip2Px(4))
 //                .setBackground(Color.parseColor("#a0a0a0"))
 //                .setBaseShadowColor(Color.parseColor("#a0a0a0"))
 //                .setImpl(SuperShadow.WRAP_RENDERER)
@@ -169,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        shadowCrazyShadow1 = new SuperShadow.Builder()
 //                .setContext(this)
 //                .setDirection(ShadowDirection.TOP)
-//                .setShadowRadius(dip2Px(5))
+//                .setShadowSize(dip2Px(5))
 //                .setBaseShadowColor(Color.parseColor("#23df77"))
 //                .setImpl(SuperShadow.WRAP_RENDERER)
 //                .action(findViewById(R.id.relay_shadow1));

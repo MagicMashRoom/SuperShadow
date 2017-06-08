@@ -55,7 +55,7 @@ public class ShadowAttr {
         if (colors == null) {
             colors = new int[3];
             colors[0] = ColorUtils.setAlphaComponent(baseShadowColor, 255);
-            colors[1] = ColorUtils.setAlphaComponent(baseShadowColor, 255);
+            colors[1] = ColorUtils.setAlphaComponent(baseShadowColor, 191);
             colors[2] = ColorUtils.setAlphaComponent(baseShadowColor, 0);
         }
     }
@@ -85,11 +85,11 @@ public class ShadowAttr {
         this.corner = corner;
     }
 
-    public float getShadowRadius() {
+    public float getShadowSize() {
         return shadowRadius;
     }
 
-    public void setShadowRadius(float shadowRadius) {
+    public void setShadowSize(float shadowRadius) {
         this.shadowRadius = shadowRadius;
     }
 

@@ -116,7 +116,7 @@ public class SuperShadow {
         /**
          * 阴影半径
          */
-        private float shadowRadius;
+        private float shadowSize;
 
         /**
          * 阴影设置在 View 的方向
@@ -185,12 +185,12 @@ public class SuperShadow {
         }
 
         /**
-         * 设置阴影半径
-         * @param shadowRadius [unit : pixels]
+         * 设置阴影大小
+         * @param shadowSize [unit : pixels]
          * @return Builder
          */
-        public Builder setShadowRadius(float shadowRadius) {
-            this.shadowRadius = shadowRadius;
+        public Builder setShadowSize(float shadowSize) {
+            this.shadowSize = shadowSize;
             return this;
         }
 
@@ -214,7 +214,7 @@ public class SuperShadow {
             attr.setBackground(background);
             attr.setColors(colors);
             attr.setCorner(corner);
-            attr.setShadowRadius(shadowRadius);
+            attr.setShadowSize(shadowSize);
             attr.setDirection(direction);
             SuperShadow superShadow = new SuperShadow(context);
             superShadow.createShadowHandler(attr);

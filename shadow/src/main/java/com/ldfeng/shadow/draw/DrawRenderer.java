@@ -42,9 +42,8 @@ public class DrawRenderer implements IShadowRenderer{
             }
         }
 
-        shadowDrawable = new RoundShadowDrawable(
-                background, attr.getColors(), attr.getCorner(),
-                attr.getShadowRadius(), attr.getShadowRadius());
+        shadowDrawable = new RoundShadowDrawable(background, attr.getColors(),
+                attr.getCorner(), attr.getShadowSize());
         view.setBackgroundDrawable(shadowDrawable);
     }
 

@@ -62,20 +62,20 @@ public class WrapRenderer implements IShadowRenderer{
         RelativeLayout.LayoutParams rlp;
         int direction = attr.getDirection();
         if (direction == ShadowDirection.LEFT || direction == ShadowDirection.RIGHT) {
-            width = (int) (contentView.getWidth() - attr.getShadowRadius());
+            width = (int) (contentView.getWidth() - attr.getShadowSize());
             height = contentView.getHeight();
             rlp = new RelativeLayout.LayoutParams(width, height);
             if (direction == ShadowDirection.LEFT)
                 rlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         } else if (direction == ShadowDirection.TOP || direction == ShadowDirection.BOTTOM) {
             width = contentView.getWidth();
-            height = (int) (contentView.getHeight() - attr.getShadowRadius());
+            height = (int) (contentView.getHeight() - attr.getShadowSize());
             rlp = new RelativeLayout.LayoutParams(width, height);
             if (direction == ShadowDirection.TOP)
                 rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         } else if (direction == ShadowDirection.LEFT_TOP || direction == ShadowDirection.TOP_RIGHT) {
-            width = (int) (contentView.getWidth() - attr.getShadowRadius());
-            height = (int) (contentView.getHeight() - attr.getShadowRadius());
+            width = (int) (contentView.getWidth() - attr.getShadowSize());
+            height = (int) (contentView.getHeight() - attr.getShadowSize());
             rlp = new RelativeLayout.LayoutParams(width, height);
             if (direction == ShadowDirection.LEFT_TOP) {
                 rlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -84,30 +84,30 @@ public class WrapRenderer implements IShadowRenderer{
             }
             rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         } else if (direction == ShadowDirection.BOTTOM_LEFT || direction == ShadowDirection.RIGHT_BOTTOM) {
-            width = (int) (contentView.getWidth() - attr.getShadowRadius());
-            height = (int) (contentView.getHeight() - attr.getShadowRadius());
+            width = (int) (contentView.getWidth() - attr.getShadowSize());
+            height = (int) (contentView.getHeight() - attr.getShadowSize());
             rlp = new RelativeLayout.LayoutParams(width, height);
             if (direction == ShadowDirection.BOTTOM_LEFT)
                 rlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         } else if (direction == ShadowDirection.BOTTOM_LEFT_TOP || direction == ShadowDirection.TOP_RIGHT_BOTTOM) {
-            width = (int) (contentView.getWidth() - attr.getShadowRadius());
-            height = (int) (contentView.getHeight() - attr.getShadowRadius() * 2);
+            width = (int) (contentView.getWidth() - attr.getShadowSize());
+            height = (int) (contentView.getHeight() - attr.getShadowSize() * 2);
             rlp = new RelativeLayout.LayoutParams(width, height);
             if (direction == ShadowDirection.BOTTOM_LEFT_TOP) {
                 rlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             }
             rlp.addRule(RelativeLayout.CENTER_VERTICAL);
         } else if (direction == ShadowDirection.LEFT_TOP_RIGHT || direction == ShadowDirection.RIGHT_BOTTOM_LEFT) {
-            width = (int) (contentView.getWidth() - attr.getShadowRadius() * 2);
-            height = (int) (contentView.getHeight() - attr.getShadowRadius());
+            width = (int) (contentView.getWidth() - attr.getShadowSize() * 2);
+            height = (int) (contentView.getHeight() - attr.getShadowSize());
             rlp = new RelativeLayout.LayoutParams(width, height);
             if (direction == ShadowDirection.LEFT_TOP_RIGHT) {
                 rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             }
             rlp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         } else { // All
-            width = (int) (contentView.getWidth() - attr.getShadowRadius() * 2);
-            height = (int) (contentView.getHeight() - attr.getShadowRadius() * 2);
+            width = (int) (contentView.getWidth() - attr.getShadowSize() * 2);
+            height = (int) (contentView.getHeight() - attr.getShadowSize() * 2);
             rlp = new RelativeLayout.LayoutParams(width, height);
             rlp.addRule(RelativeLayout.CENTER_IN_PARENT);
         }
@@ -124,7 +124,7 @@ public class WrapRenderer implements IShadowRenderer{
                 .setContext(context)
                 .setShadowColors(attr.getColors())
                 .setCornerRadius(attr.getCorner())
-                .setShadowRadius(attr.getShadowRadius());
+                .setShadowRadius(attr.getShadowSize());
 
         if (attr.containLeft())
             decorateLeft(edgeShadowBuilder);
@@ -146,10 +146,10 @@ public class WrapRenderer implements IShadowRenderer{
             shadowSize = contentView.getHeight();
         } else if (attr.getDirection() == ShadowDirection.ALL
                 || attr.getDirection() == ShadowDirection.BOTTOM_LEFT_TOP) {
-            shadowSize = contentView.getHeight() - 2 * (attr.getShadowRadius() + attr.getCorner());
+            shadowSize = contentView.getHeight() - 2 * (attr.getShadowSize() + attr.getCorner());
             leftRlp.addRule(RelativeLayout.CENTER_VERTICAL);
         } else {
-            shadowSize = contentView.getHeight() - attr.getShadowRadius() - attr.getCorner();
+            shadowSize = contentView.getHeight() - attr.getShadowSize() - attr.getCorner();
             if (attr.getDirection() == ShadowDirection.LEFT_TOP || attr.getDirection() == ShadowDirection.LEFT_TOP_RIGHT) {
                 leftRlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             }
@@ -172,10 +172,10 @@ public class WrapRenderer implements IShadowRenderer{
             shadowSize = contentView.getWidth();
         } else if (attr.getDirection() == ShadowDirection.ALL
                 || attr.getDirection() == ShadowDirection.LEFT_TOP_RIGHT) {
-            shadowSize = contentView.getWidth() - 2 * (attr.getShadowRadius() + attr.getCorner());
+            shadowSize = contentView.getWidth() - 2 * (attr.getShadowSize() + attr.getCorner());
             topRlp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         } else {
-            shadowSize = contentView.getWidth() - attr.getShadowRadius() - attr.getCorner();
+            shadowSize = contentView.getWidth() - attr.getShadowSize() - attr.getCorner();
             if (attr.getDirection() == ShadowDirection.LEFT_TOP || attr.getDirection() == ShadowDirection.BOTTOM_LEFT_TOP) {
                 topRlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             }
@@ -198,10 +198,10 @@ public class WrapRenderer implements IShadowRenderer{
             shadowSize = contentView.getHeight();
         } else if (attr.getDirection() == ShadowDirection.ALL
                 || attr.getDirection() == ShadowDirection.TOP_RIGHT_BOTTOM) {
-            shadowSize = contentView.getHeight() - 2 * (attr.getShadowRadius() + attr.getCorner());
+            shadowSize = contentView.getHeight() - 2 * (attr.getShadowSize() + attr.getCorner());
             rightRlp.addRule(RelativeLayout.CENTER_VERTICAL);
         } else {
-            shadowSize = contentView.getHeight() - attr.getShadowRadius() - attr.getCorner();
+            shadowSize = contentView.getHeight() - attr.getShadowSize() - attr.getCorner();
             if (attr.getDirection() == ShadowDirection.TOP_RIGHT || attr.getDirection() == ShadowDirection.LEFT_TOP_RIGHT) {
                 rightRlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             }
@@ -224,10 +224,10 @@ public class WrapRenderer implements IShadowRenderer{
             shadowSize = contentView.getWidth();
         } else if (attr.getDirection() == ShadowDirection.ALL
                 || attr.getDirection() == ShadowDirection.RIGHT_BOTTOM_LEFT) {
-            shadowSize = contentView.getWidth() - 2 * (attr.getShadowRadius() + attr.getCorner());
+            shadowSize = contentView.getWidth() - 2 * (attr.getShadowSize() + attr.getCorner());
             bottomRlp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         } else {
-            shadowSize = contentView.getWidth() - attr.getShadowRadius() - attr.getCorner();
+            shadowSize = contentView.getWidth() - attr.getShadowSize() - attr.getCorner();
             if (attr.getDirection() == ShadowDirection.BOTTOM_LEFT || attr.getDirection() == ShadowDirection.BOTTOM_LEFT_TOP) {
                 bottomRlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             }
@@ -246,7 +246,7 @@ public class WrapRenderer implements IShadowRenderer{
         CornerShadowView.Builder cornerShadowBuilder = new CornerShadowView.Builder()
                 .setContext(context)
                 .setShadowColors(attr.getColors())
-                .setShadowSize(attr.getShadowRadius())
+                .setShadowSize(attr.getShadowSize())
                 .setCornerRadius(attr.getCorner());
 
         if (attr.containLeft() && attr.containTop())

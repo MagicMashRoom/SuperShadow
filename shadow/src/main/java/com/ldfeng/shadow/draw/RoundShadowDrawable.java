@@ -11,7 +11,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 /**
  * Created by ldf on 17/6/6.
@@ -25,26 +24,24 @@ public class RoundShadowDrawable extends Drawable {
 
     final static float SHADOW_MULTIPLIER = 1.5f;
 
-    final int insetShadow; // extra shadow to avoid gaps between card and shadow
+    final float minShadowSize; // extra shadow to avoid gaps between card and shadow
     final RectF bounds;
     Paint paint;
     Paint shadowCornerPaint;
     Paint shadowEdgePaint;
     float cornerRadius;
-    Path cornerShadowPath;
-
-    float maxShadowSize;
-    float rawMaxShadowSize;
-
+    float shadowRadius;
     float shadowSize;
     float rawShadowSize;
+    Path cornerShadowPath;
 
     private int[] shadowColors;
     private boolean dirty = true;
     private boolean addPaddingForCorners = true;
 
-    public RoundShadowDrawable(int background, int[] shadowColors, float radius, float shadowSize, float maxShadowSize) {
-        insetShadow = 10;
+    public RoundShadowDrawable(int background, int[] shadowColors,
+                               float radius, float shadowSize) {
+        minShadowSize = 10;
         this.shadowColors = shadowColors;
         paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
         paint.setColor(background);
@@ -54,7 +51,7 @@ public class RoundShadowDrawable extends Drawable {
         bounds = new RectF();
         shadowEdgePaint = new Paint(shadowCornerPaint);
         shadowEdgePaint.setAntiAlias(false);
-        configShadowSize(shadowSize, maxShadowSize);
+        configShadowSize(radius , shadowSize);
     }
 
     /**
@@ -86,47 +83,39 @@ public class RoundShadowDrawable extends Drawable {
         dirty = true;
     }
 
-    void configShadowSize(float shadowSize, float maxShadowSize) {
+    void configShadowSize(float cornerRadius , float shadowSize) {
         if (shadowSize < 0f) {
             throw new IllegalArgumentException("Invalid shadow size " + shadowSize +
                     ". Must be >= 0");
         }
-        if (maxShadowSize < 0f) {
-            throw new IllegalArgumentException("Invalid max shadow size " + maxShadowSize +
-                    ". Must be >= 0");
+
+        rawShadowSize = shadowRadius;
+
+        if(shadowSize < minShadowSize) {
+            shadowSize = minShadowSize;
         }
-        shadowSize = toEven(shadowSize);
-        maxShadowSize = toEven(maxShadowSize);
-        if (shadowSize > maxShadowSize) {
-            shadowSize = maxShadowSize;
-        }
-        if (rawShadowSize == shadowSize && rawMaxShadowSize == maxShadowSize) {
-            return;
-        }
-        rawShadowSize = shadowSize;
-        rawMaxShadowSize = maxShadowSize;
-        this.shadowSize = (int) (shadowSize * SHADOW_MULTIPLIER + insetShadow + .5f);
-        this.maxShadowSize = maxShadowSize + insetShadow;
+        this.shadowSize =  shadowSize * SHADOW_MULTIPLIER;
+        shadowRadius = toEven(shadowSize) + cornerRadius;
         dirty = true;
         invalidateSelf();
     }
 
     @Override
     public boolean getPadding(Rect padding) {
-        int vOffset = (int) Math.ceil(calculateVerticalPadding(rawMaxShadowSize, cornerRadius,
+        int vOffset = (int) Math.ceil(calculateVerticalPadding(shadowRadius, cornerRadius,
                 addPaddingForCorners));
-        int hOffset = (int) Math.ceil(calculateHorizontalPadding(rawMaxShadowSize, cornerRadius,
+        int hOffset = (int) Math.ceil(calculateHorizontalPadding(shadowRadius, cornerRadius,
                 addPaddingForCorners));
         padding.set(hOffset, vOffset, hOffset, vOffset);
         return true;
     }
 
-    float calculateVerticalPadding(float maxShadowSize, float cornerRadius,
+    float calculateVerticalPadding(float shadowRaduis, float cornerRadius,
                                    boolean addPaddingForCorners) {
         if (addPaddingForCorners) {
-            return (float) (maxShadowSize * SHADOW_MULTIPLIER + (1 - COS_45) * cornerRadius);
+            return (float) (shadowRaduis * SHADOW_MULTIPLIER + (1 - COS_45) * cornerRadius);
         } else {
-            return maxShadowSize * SHADOW_MULTIPLIER;
+            return shadowRaduis * SHADOW_MULTIPLIER;
         }
     }
 
@@ -156,9 +145,9 @@ public class RoundShadowDrawable extends Drawable {
             dirty = false;
         }
         drawShadow(canvas);
-        bounds.inset(shadowSize - cornerRadius, shadowSize - cornerRadius);
+        bounds.inset(shadowRadius - cornerRadius, shadowRadius - cornerRadius);
         canvas.drawRoundRect(bounds, cornerRadius , cornerRadius , paint);
-        bounds.inset(-shadowSize + cornerRadius, -shadowSize + cornerRadius);
+        bounds.inset(-shadowRadius + cornerRadius, -shadowRadius + cornerRadius);
     }
 
     private void buildComponents(Rect bounds) {
@@ -168,9 +157,9 @@ public class RoundShadowDrawable extends Drawable {
     }
 
     private void buildShadowCorners() {
-        RectF cornerRecf = new RectF(shadowSize - cornerRadius, shadowSize - cornerRadius,
-                shadowSize + cornerRadius, shadowSize + cornerRadius);
-        RectF shadowCornerRecf = new RectF(0, 0, 2 * shadowSize, 2 * shadowSize);
+        RectF cornerRecf = new RectF(shadowRadius - cornerRadius, shadowRadius - cornerRadius,
+                shadowRadius + cornerRadius, shadowRadius + cornerRadius);
+        RectF shadowCornerRecf = new RectF(0, 0, 2 * shadowRadius, 2 * shadowRadius);
 
         if (cornerShadowPath == null) {
             cornerShadowPath = new Path();
@@ -178,39 +167,40 @@ public class RoundShadowDrawable extends Drawable {
             cornerShadowPath.reset();
         }
         cornerShadowPath.setFillType(Path.FillType.EVEN_ODD);
-        cornerShadowPath.moveTo(shadowSize - cornerRadius, shadowSize);
+        cornerShadowPath.moveTo(shadowRadius - cornerRadius, shadowRadius);
         // 内半圆，如果cornerRadius 为零时，将绘制不出阴影的内圆角
 
         cornerShadowPath.arcTo(cornerRecf, 180f, 90f, false);
-        cornerShadowPath.lineTo(shadowSize, 0);
+        cornerShadowPath.lineTo(shadowRadius, 0);
         // 外半圆，始终都会绘制shadow的圆角
         cornerShadowPath.arcTo(shadowCornerRecf, 270f, -90f, false);
-        cornerShadowPath.lineTo(shadowSize - cornerRadius , shadowSize);
+        cornerShadowPath.lineTo(shadowRadius - cornerRadius , shadowRadius);
 
         cornerShadowPath.close();
 
-        shadowCornerPaint.setShader(new RadialGradient(shadowSize  , shadowSize  ,
-                shadowSize , shadowColors,
-                new float[]{0, 1 / 2 , 1f}
+        float startPosition = cornerRadius / shadowRadius;
+
+        shadowCornerPaint.setShader(new RadialGradient(shadowRadius  , shadowRadius  ,
+                shadowRadius , shadowColors,
+                new float[]{0, startPosition , 1f}
                 , Shader.TileMode.CLAMP));
 
-        shadowEdgePaint.setShader(new LinearGradient(shadowSize, shadowSize,
-                shadowSize, 0,
+        shadowEdgePaint.setShader(new LinearGradient(shadowRadius, shadowRadius,
+                shadowRadius, 0,
                 shadowColors,
-                new float[]{0, 1 / 2 , 1f}, Shader.TileMode.CLAMP));
+                new float[]{0, startPosition , 1f}, Shader.TileMode.CLAMP));
         shadowEdgePaint.setAntiAlias(false);
     }
 
     private void drawShadow(Canvas canvas) {
-        final float inset = cornerRadius + insetShadow + rawShadowSize / 2;
-        final boolean drawHorizontalEdges = bounds.width() - 2 * inset > 0;
-        final boolean drawVerticalEdges = bounds.height() - 2 * inset > 0;
+        final boolean drawHorizontalEdges = bounds.width() - 2 * shadowRadius > 0;
+        final boolean drawVerticalEdges = bounds.height() - 2 * shadowRadius > 0;
         // LT
         int saved = canvas.save();
         canvas.drawPath(cornerShadowPath, shadowCornerPaint);
         if (drawHorizontalEdges) {
-            canvas.drawRect(shadowSize, 0,
-                    bounds.width() - shadowSize, shadowSize - cornerRadius,
+            canvas.drawRect(shadowRadius, 0,
+                    bounds.width() - shadowRadius, shadowRadius - cornerRadius,
                     shadowEdgePaint);
         }
         canvas.restoreToCount(saved);
@@ -220,8 +210,8 @@ public class RoundShadowDrawable extends Drawable {
         canvas.rotate(180f);
         canvas.drawPath(cornerShadowPath, shadowCornerPaint);
         if (drawHorizontalEdges) {
-            canvas.drawRect(shadowSize, shadowSize - cornerRadius,
-                    bounds.width() - shadowSize, cornerRadius - shadowSize,
+            canvas.drawRect(shadowRadius, 0,
+                    bounds.width() - shadowRadius, shadowRadius - cornerRadius,
                     shadowEdgePaint);
         }
         canvas.restoreToCount(saved);
@@ -231,8 +221,8 @@ public class RoundShadowDrawable extends Drawable {
         canvas.rotate(270f);
         canvas.drawPath(cornerShadowPath, shadowCornerPaint);
         if (drawVerticalEdges) {
-            canvas.drawRect(shadowSize, 0,
-                    bounds.height() - shadowSize, shadowSize - cornerRadius,
+            canvas.drawRect(shadowRadius, 0,
+                    bounds.height() - shadowRadius, shadowRadius - cornerRadius,
                     shadowEdgePaint);
         }
         canvas.restoreToCount(saved);
@@ -242,8 +232,8 @@ public class RoundShadowDrawable extends Drawable {
         canvas.rotate(90f);
         canvas.drawPath(cornerShadowPath, shadowCornerPaint);
         if (drawVerticalEdges) {
-            canvas.drawRect(shadowSize, 0,
-                    bounds.height() - shadowSize, shadowSize - cornerRadius,
+            canvas.drawRect(shadowRadius, 0,
+                    bounds.height() - shadowRadius, shadowRadius - cornerRadius,
                     shadowEdgePaint);
         }
         canvas.restoreToCount(saved);
@@ -275,26 +265,18 @@ public class RoundShadowDrawable extends Drawable {
     }
 
     void setShadowSize(float size) {
-        configShadowSize(size, rawMaxShadowSize);
-    }
-
-    float getMaxShadowSize() {
-        return rawMaxShadowSize;
-    }
-
-    void setMaxShadowSize(float size) {
-        configShadowSize(rawShadowSize, size);
+        configShadowSize(cornerRadius, size);
     }
 
     float getMinWidth() {
         final float content = 2 *
-                Math.max(rawMaxShadowSize, cornerRadius + insetShadow + rawMaxShadowSize / 2);
-        return content + (rawMaxShadowSize + insetShadow) * 2;
+                Math.max(shadowRadius, cornerRadius + minShadowSize + shadowRadius / 2);
+        return content + (shadowRadius + minShadowSize) * 2;
     }
 
     float getMinHeight() {
-        final float content = 2 * Math.max(rawMaxShadowSize, cornerRadius + insetShadow
-                + rawMaxShadowSize * SHADOW_MULTIPLIER / 2);
-        return content + (rawMaxShadowSize * SHADOW_MULTIPLIER + insetShadow) * 2;
+        final float content = 2 * Math.max(shadowRadius, cornerRadius + minShadowSize
+                + shadowRadius * SHADOW_MULTIPLIER / 2);
+        return content + (shadowRadius * SHADOW_MULTIPLIER + minShadowSize) * 2;
     }
 }
