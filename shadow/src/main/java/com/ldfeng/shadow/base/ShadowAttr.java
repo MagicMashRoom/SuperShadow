@@ -55,7 +55,7 @@ public class ShadowAttr {
         if (colors == null) {
             colors = new int[3];
             colors[0] = ColorUtils.setAlphaComponent(baseShadowColor, 255);
-            colors[1] = ColorUtils.setAlphaComponent(baseShadowColor, 128);
+            colors[1] = ColorUtils.setAlphaComponent(baseShadowColor, 255);
             colors[2] = ColorUtils.setAlphaComponent(baseShadowColor, 0);
         }
     }

@@ -37,8 +37,6 @@ Step 2. Add the dependency
                 .action(findViewById(R.id.relay_draw1));
     ​
 
-更多示例代码可以查看 [MainActivity](https://github.com/Hitomis/CrazyShadow/blob/master/app/src/main/java/com/hitomi/crazyshadow/MainActivity.java)
-
 # Attribute
 
 | 属性 | 说明 |

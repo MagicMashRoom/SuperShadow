@@ -5,8 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/CrazyShadow-master.iml" filepath="$PROJECT_DIR$/CrazyShadow-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/SuperShadow.iml" filepath="$PROJECT_DIR$/SuperShadow.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/shadow/shadow.iml" filepath="$PROJECT_DIR$/shadow/shadow.iml" />
       <module fileurl="file://$PROJECT_DIR$/shadow/shadow.iml" filepath="$PROJECT_DIR$/shadow/shadow.iml" />
     </modules>
   </component>

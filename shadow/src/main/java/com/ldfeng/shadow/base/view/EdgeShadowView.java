@@ -10,8 +10,11 @@ import android.view.View;
 import com.ldfeng.shadow.base.ShadowDirection;
 
 /**
- * Created by hitomi on 2016/10/17.
+ * Created by ldf on 17/6/6.
+ * email : 2286767746@qq.com
+ * https://github.com/MagicMashRoom
  */
+
 public class EdgeShadowView extends View {
 
     private Paint shadowPaint;

@@ -16,6 +16,8 @@ import com.ldfeng.shadow.base.view.EdgeShadowView;
 
 /**
  * Created by ldf on 17/6/6.
+ * email : 2286767746@qq.com
+ * https://github.com/MagicMashRoom
  */
 
 public class WrapRenderer implements IShadowRenderer{
@@ -303,24 +305,53 @@ public class WrapRenderer implements IShadowRenderer{
         leftBottomRlp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         shadowLayout.addView(leftBottomCornerShadow, leftBottomRlp);
     }
+
     @Override
     public void makeShadow(View view) {
-
+        contentView = view;
+        init = true;
+        if (attr.getBackground() != 0) {
+            orignalDrawable = contentView.getBackground();
+            contentView.setBackgroundColor(attr.getBackground());
+        }
+        contentView.getViewTreeObserver().addOnGlobalLayoutListener(measureListener);
     }
 
     @Override
     public void removeShadow() {
+        shadowLayout.removeView(contentView);
 
+        ViewGroup parent = (ViewGroup) shadowLayout.getParent();
+        int orignalIndex = parent.indexOfChild(shadowLayout);
+        parent.removeView(shadowLayout);
+
+        contentView.setLayoutParams(shadowLayout.getLayoutParams());
+        parent.addView(contentView, orignalIndex);
+
+        if (attr.getBackground() != 0) {
+            contentView.setBackgroundDrawable(orignalDrawable);
+        }
     }
 
     @Override
     public void hideShadow() {
-
+        setShadowViewAlpha(0);
+        ViewGroup.LayoutParams contentViewLp = contentView.getLayoutParams();
+        contentViewLp.width = shadowLayout.getLayoutParams().width;
+        contentViewLp.height = shadowLayout.getLayoutParams().height;
+        contentView.setLayoutParams(contentViewLp);
+        if (attr.getBackground() != 0) {
+            contentView.setBackgroundDrawable(orignalDrawable);
+        }
     }
 
     @Override
     public void showShadow() {
-
+        setShadowViewAlpha(1);
+        contentView.setLayoutParams(getContentViewLayoutParams());
+        if (attr.getBackground() != 0 && contentView != null) {
+            contentView.setBackgroundColor(attr.getBackground());
+        }
     }
 
     private void setShadowViewAlpha(int alpha) {

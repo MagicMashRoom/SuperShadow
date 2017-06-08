@@ -205,10 +205,9 @@ public class SuperShadow {
         }
 
         private SuperShadow create() {
-            if (colors == null && baseShadowColor == 0)
-                // 默认的颜色。由深到浅
-                //分别为开始颜色，中间颜色，结束颜色
+            if (colors == null && baseShadowColor == 0){
                 colors = new int[]{0x63000000, 0x32000000, 0x00000000};
+            }
             ShadowAttr attr = new ShadowAttr();
             attr.setImpl(impl);
             attr.setBaseShadowColor(baseShadowColor);
