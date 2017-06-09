@@ -10,32 +10,32 @@
 
         <RelativeLayout
             android:id="@+id/relay_title"
-            android:layout_width="240dp"
-            android:layout_height="240dp"
-            android:background="#ff4444"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="6.67dp"
+            android:background="@android:color/holo_green_dark"
             android:layout_gravity="center_horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/relay_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
-                android:text="带阴影的标题栏"
-                android:textColor="@android:color/background_dark"
-                android:background="#ff4444"/>
+                android:background="@drawable/title_background"/>
 
         </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.67dp"
-            android:layout_marginTop=".67dp"
-            android:layout_marginBottom=".67dp"
+            android:layout_marginTop="6.67dp"
+            android:layout_marginBottom="6.67dp"
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
             android:id="@+id/relay_draw0"
-            android:layout_width="250dp"
+            android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
@@ -54,13 +54,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.67dp"
-            android:layout_marginTop=".67dp"
-            android:layout_marginBottom=".67dp"
+            android:layout_marginTop="6.67dp"
+            android:layout_marginBottom="6.67dp"
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
             android:id="@+id/relay_draw1"
-            android:layout_width="250dp"
+            android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
@@ -80,13 +80,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.67dp"
-            android:layout_marginTop=".67dp"
-            android:layout_marginBottom=".67dp"
+            android:layout_marginTop="6.67dp"
+            android:layout_marginBottom="6.67dp"
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
             android:id="@+id/relay_wrap0"
-            android:layout_width="250dp"
+            android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
@@ -105,13 +105,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.67dp"
-            android:layout_marginTop=".67dp"
-            android:layout_marginBottom=".67dp"
+            android:layout_marginTop="6.67dp"
+            android:layout_marginBottom="6.67dp"
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
             android:id="@+id/relay_wrap1"
-            android:layout_width="250dp"
+            android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
@@ -130,54 +130,50 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.67dp"
-            android:layout_marginTop=".67dp"
-            android:layout_marginBottom=".67dp"
+            android:layout_marginTop="6.67dp"
+            android:layout_marginBottom="6.67dp"
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
+            android:id="@+id/relay_shadow0"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/holo_blue_light">
 
-            <RelativeLayout
-                android:id="@+id/relay_shadow0"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="可以设置 CrazyShadow 的 baseShadowColor 或者 shadowColors 来设置阴影色 / 可设置 background 直接修改背景色"
-                    android:textColor="@android:color/white"
-                    android:textSize="10sp" />
-
-            </RelativeLayout>
-
-            <View
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="0.67dp"
-                android:layout_marginTop=".67dp"
-                android:layout_marginBottom=".67dp"
-                android:background="@android:color/darker_gray"/>
-
-            <RelativeLayout
-                android:id="@+id/relay_shadow1"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_alignParentBottom="true"
-                android:background="#23df77">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="可指定阴影附加在 View 的方位" />
-
-            </RelativeLayout>
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="可以设置 CrazyShadow 的 baseShadowColor 或者 shadowColors 来设置阴影色 / 可设置 background 直接修改背景色"
+                android:textColor="@android:color/background_dark"
+                android:textSize="10sp" />
 
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.67dp"
+            android:layout_marginTop="6.67dp"
+            android:layout_marginBottom="6.67dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:id="@+id/relay_shadow1"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/holo_green_light">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="可指定阴影附加在 View 的方位" />
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

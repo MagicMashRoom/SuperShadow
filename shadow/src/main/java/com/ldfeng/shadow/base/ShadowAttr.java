@@ -33,9 +33,9 @@ public class ShadowAttr {
     private float corner;
 
     /**
-     * 阴影半径
+     * 阴影大小
      */
-    private float shadowRadius;
+    private float shadowSize;
 
     /**
      * 设置阴影的方向，具体查看 {@link ShadowAttr}
@@ -86,11 +86,11 @@ public class ShadowAttr {
     }
 
     public float getShadowSize() {
-        return shadowRadius;
+        return shadowSize;
     }
 
-    public void setShadowSize(float shadowRadius) {
-        this.shadowRadius = shadowRadius;
+    public void setShadowSize(float shadowSize) {
+        this.shadowSize = shadowSize;
     }
 
     public int getDirection() {

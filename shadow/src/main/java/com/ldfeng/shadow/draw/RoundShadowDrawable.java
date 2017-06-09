@@ -1,8 +1,11 @@
 package com.ldfeng.shadow.draw;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.LinearGradient;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
@@ -10,7 +13,9 @@ import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.View;
 
 /**
  * Created by ldf on 17/6/6.
@@ -20,31 +25,30 @@ import android.graphics.drawable.Drawable;
 
 public class RoundShadowDrawable extends Drawable {
     // used to calculate content padding
-    final static double COS_45 = Math.cos(Math.toRadians(45));
+    private final static double COS_45 = Math.cos(Math.toRadians(45));
 
-    final static float SHADOW_MULTIPLIER = 1.5f;
+    public final static float SHADOW_MULTIPLIER = 1.5f;
 
-    final float minShadowSize; // extra shadow to avoid gaps between card and shadow
-    final RectF bounds;
-    Paint paint;
-    Paint shadowCornerPaint;
-    Paint shadowEdgePaint;
-    float cornerRadius;
-    float shadowRadius;
-    float shadowSize;
-    float rawShadowSize;
-    Path cornerShadowPath;
+    private final float minShadowSize; // extra shadow to avoid gaps between card and shadow
+    private final RectF bounds;
+    private Paint bitmapPaint;
+    private Paint shadowCornerPaint;
+    private Paint shadowEdgePaint;
+    private float cornerRadius;
+    private float shadowRadius;
+    private float shadowSize;
+    private Path cornerShadowPath;
+    private Drawable originalDrawable;
 
     private int[] shadowColors;
     private boolean dirty = true;
     private boolean addPaddingForCorners = true;
 
-    public RoundShadowDrawable(int background, int[] shadowColors,
+    public RoundShadowDrawable(View view, int[] shadowColors,
                                float radius, float shadowSize) {
         minShadowSize = 10;
         this.shadowColors = shadowColors;
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
-        paint.setColor(background);
+        this.originalDrawable = view.getBackground();
         shadowCornerPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
         shadowCornerPaint.setStyle(Paint.Style.FILL);
         cornerRadius = (int) (radius + .5f);
@@ -54,6 +58,38 @@ public class RoundShadowDrawable extends Drawable {
         configShadowSize(radius , shadowSize);
     }
 
+    private Paint initBitmapPaint(Drawable drawable) {
+        Paint bitmapPaint = new Paint();
+        bitmapPaint.setAntiAlias(true);
+        if (drawable == null) {
+            return null;
+        }
+        Bitmap bmp = drawableToBitmap(drawable);
+        float scaleWidth  = (bounds.width() - shadowRadius) * 1.0f / bmp.getWidth();
+        float scaleHeight  = (bounds.height() - shadowRadius) * 1.0f / bmp.getHeight();
+        Matrix matrix = new Matrix();
+        matrix.setScale(scaleWidth, scaleHeight);
+        BitmapShader bitmapShader = new BitmapShader(bmp, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        bitmapShader.setLocalMatrix(matrix);
+        bitmapPaint.setShader(bitmapShader);
+        return bitmapPaint;
+    }
+
+    private Bitmap drawableToBitmap(Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bd = (BitmapDrawable) drawable;
+            return bd.getBitmap();
+        } else {
+            int w = (int)(bounds.width());
+            int h = (int)(bounds.height());
+
+            Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, w, h);
+            drawable.draw(canvas);
+            return bitmap;
+        }
+    }
     /**
      * Casts the value to an even integer.
      */
@@ -72,7 +108,7 @@ public class RoundShadowDrawable extends Drawable {
 
     @Override
     public void setAlpha(int alpha) {
-        paint.setAlpha(alpha);
+        bitmapPaint.setAlpha(alpha);
         shadowCornerPaint.setAlpha(alpha);
         shadowEdgePaint.setAlpha(alpha);
     }
@@ -89,48 +125,33 @@ public class RoundShadowDrawable extends Drawable {
                     ". Must be >= 0");
         }
 
-        rawShadowSize = shadowRadius;
-
         if(shadowSize < minShadowSize) {
             shadowSize = minShadowSize;
         }
         this.shadowSize =  shadowSize * SHADOW_MULTIPLIER;
-        shadowRadius = toEven(shadowSize) + cornerRadius;
+        shadowRadius = toEven(this.shadowSize) + cornerRadius;
         dirty = true;
         invalidateSelf();
     }
 
     @Override
     public boolean getPadding(Rect padding) {
-        int vOffset = (int) Math.ceil(calculateVerticalPadding(shadowRadius, cornerRadius,
-                addPaddingForCorners));
-        int hOffset = (int) Math.ceil(calculateHorizontalPadding(shadowRadius, cornerRadius,
-                addPaddingForCorners));
-        padding.set(hOffset, vOffset, hOffset, vOffset);
+        int offset = (int) Math.ceil(calculatePadding(addPaddingForCorners));
+        padding.set(offset, offset, offset, offset);
         return true;
     }
 
-    float calculateVerticalPadding(float shadowRaduis, float cornerRadius,
-                                   boolean addPaddingForCorners) {
+    float calculatePadding(boolean addPaddingForCorners) {
         if (addPaddingForCorners) {
-            return (float) (shadowRaduis * SHADOW_MULTIPLIER + (1 - COS_45) * cornerRadius);
+            return (float) (shadowSize + (1 - COS_45) * cornerRadius);
         } else {
-            return shadowRaduis * SHADOW_MULTIPLIER;
-        }
-    }
-
-    float calculateHorizontalPadding(float maxShadowSize, float cornerRadius,
-                                     boolean addPaddingForCorners) {
-        if (addPaddingForCorners) {
-            return (float) (maxShadowSize + (1 - COS_45) * cornerRadius);
-        } else {
-            return maxShadowSize;
+            return shadowSize;
         }
     }
 
     @Override
     public void setColorFilter(ColorFilter cf) {
-        paint.setColorFilter(cf);
+        bitmapPaint.setColorFilter(cf);
     }
 
     @Override
@@ -144,15 +165,25 @@ public class RoundShadowDrawable extends Drawable {
             buildComponents(getBounds());
             dirty = false;
         }
+
         drawShadow(canvas);
         bounds.inset(shadowRadius - cornerRadius, shadowRadius - cornerRadius);
-        canvas.drawRoundRect(bounds, cornerRadius , cornerRadius , paint);
+        canvas.drawRoundRect(bounds, cornerRadius , cornerRadius , bitmapPaint);
         bounds.inset(-shadowRadius + cornerRadius, -shadowRadius + cornerRadius);
     }
 
     private void buildComponents(Rect bounds) {
+
+        if(bounds.height() == (int) Math.ceil(calculatePadding(addPaddingForCorners)) * 2
+                ||bounds.width() == (int) Math.ceil(calculatePadding(addPaddingForCorners)) * 2) {
+            MeasureSpec measureSpec = MeasureSpec.WRAP_CONTENT;
+            throw new IllegalArgumentException("Invalid MeasureSpec " + measureSpec +
+                    ". Must be MeasureSpec.MATCH_PARENT");
+        }
+
         this.bounds.set(bounds.left , bounds.top ,
                 bounds.right , bounds.bottom );
+        bitmapPaint = initBitmapPaint(originalDrawable);
         buildShadowCorners();
     }
 
@@ -260,8 +291,8 @@ public class RoundShadowDrawable extends Drawable {
         getPadding(into);
     }
 
-    float getShadowSize() {
-        return rawShadowSize;
+    float getShadowRadius() {
+        return shadowRadius;
     }
 
     void setShadowSize(float size) {
@@ -278,5 +309,9 @@ public class RoundShadowDrawable extends Drawable {
         final float content = 2 * Math.max(shadowRadius, cornerRadius + minShadowSize
                 + shadowRadius * SHADOW_MULTIPLIER / 2);
         return content + (shadowRadius * SHADOW_MULTIPLIER + minShadowSize) * 2;
+    }
+
+    private enum MeasureSpec {
+        MATCH_PARENT , WRAP_CONTENT
     }
 }

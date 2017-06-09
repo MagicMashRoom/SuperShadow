@@ -1,18 +1,25 @@
 package com.ldfeng.supershadow;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ldfeng.shadow.SuperShadow;
 import com.ldfeng.shadow.base.ShadowDirection;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private Context context;
+
     private View titleView;
 
-    private View drawView0, drawView1;
+    private ImageView titleViewTv;
+
+    private View drawView, drawRoundView;
 
     private View wrapView0, wrapView1;
 
@@ -43,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initListener() {
         titleView.setOnClickListener(this);
-        drawView0.setOnClickListener(this);
-        drawView1.setOnClickListener(this);
+        drawView.setOnClickListener(this);
+        drawRoundView.setOnClickListener(this);
         wrapView0.setOnClickListener(this);
         wrapView1.setOnClickListener(this);
         shadowView0.setOnClickListener(this);
@@ -119,10 +126,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setContext(this)
                 .setDirection(ShadowDirection.ALL)
                 .setShadowSize(dip2Px(12))
-                .setCorner(dip2Px(0))
+                .setCorner(dip2Px(4))
                 .setBaseShadowColor(Color.parseColor("#ff4444"))
                 .setImpl(SuperShadow.DRAW_RENDERER)
-                .action(titleView);
+                .action(titleViewTv);
 //
 //        drawCrazyShadow0 = new SuperShadow.Builder()
 //                .setContext(this)
@@ -130,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                .setShadowSize(dip2Px(12))
 //                .setBaseShadowColor(Color.RED)
 //                .setImpl(SuperShadow.DRAW_RENDERER)
-//                .action(drawView0);
+//                .action(drawView);
 //
 //        drawCrazyShadow1 = new SuperShadow.Builder()
 //                .setContext(this)
@@ -139,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                .setCorner(dip2Px(5))
 //                .setBackground(Color.parseColor("#96a993"))
 //                .setImpl(SuperShadow.DRAW_RENDERER)
-//                .action(drawView1);
+//                .action(drawRoundView);
 //
 //        wrapCrazyShadow0 = new SuperShadow.Builder()
 //                .setContext(this)
@@ -165,20 +172,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                .setImpl(SuperShadow.WRAP_RENDERER)
 //                .action(findViewById(R.id.relay_shadow0));
 //
-//        shadowCrazyShadow1 = new SuperShadow.Builder()
-//                .setContext(this)
-//                .setDirection(ShadowDirection.TOP)
-//                .setShadowSize(dip2Px(5))
-//                .setBaseShadowColor(Color.parseColor("#23df77"))
-//                .setImpl(SuperShadow.WRAP_RENDERER)
-//                .action(findViewById(R.id.relay_shadow1));
+        shadowCrazyShadow1 = new SuperShadow.Builder()
+                .setContext(this)
+                .setDirection(ShadowDirection.TOP)
+                .setShadowSize(dip2Px(12))
+                .setCorner(dip2Px(4))
+                .setBaseShadowColor(Color.parseColor("#99cc00"))
+                .setImpl(SuperShadow.WRAP_RENDERER)
+                .action(findViewById(R.id.relay_shadow1));
 
     }
 
     private void initView() {
         titleView = findViewById(R.id.relay_title);
-        drawView0 = findViewById(R.id.relay_draw0);
-        drawView1 = findViewById(R.id.relay_draw1);
+        titleViewTv = (ImageView) findViewById(R.id.relay_title_tv);
+        drawView = findViewById(R.id.relay_draw0);
+        drawRoundView = findViewById(R.id.relay_draw1);
         wrapView0 = findViewById(R.id.relay_wrap0);
         wrapView1 = findViewById(R.id.relay_wrap1);
         shadowView0 = findViewById(R.id.relay_shadow0);

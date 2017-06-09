@@ -1,8 +1,15 @@
 package com.ldfeng.shadow.draw;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 
 import com.ldfeng.shadow.base.IShadowRenderer;
@@ -30,19 +37,7 @@ public class DrawRenderer implements IShadowRenderer{
     public void makeShadow(View view) {
         this.view = view;
         orignalDrawable = view.getBackground();
-        int background;
-        if (attr.getBackground() != 0) {
-            background = attr.getBackground();
-        } else {
-            ColorDrawable colorDrawable = (ColorDrawable) view.getBackground();
-            if (colorDrawable == null) {
-                background = Color.WHITE;
-            } else {
-                background = colorDrawable.getColor();
-            }
-        }
-
-        shadowDrawable = new RoundShadowDrawable(background, attr.getColors(),
+        shadowDrawable = new RoundShadowDrawable(view, attr.getColors(),
                 attr.getCorner(), attr.getShadowSize());
         view.setBackgroundDrawable(shadowDrawable);
     }
