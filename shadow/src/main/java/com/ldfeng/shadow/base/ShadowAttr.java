@@ -109,6 +109,7 @@ public class ShadowAttr {
                 direction == ShadowDirection.BOTTOM_LEFT_TOP ||
                 direction == ShadowDirection.RIGHT_BOTTOM_LEFT ||
                 direction == ShadowDirection.LEFT_TOP_RIGHT;
+
     }
 
     public boolean containTop() {

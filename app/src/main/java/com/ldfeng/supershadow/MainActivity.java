@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,10 +44,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setStatusBar();
         initView();
         initShadow();
         initListener();
+    }
+
+    private void setStatusBar() {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.colorAccent));
     }
 
     private void initListener() {
@@ -125,8 +133,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         titleCrazyShadow = new SuperShadow.Builder()
                 .setContext(this)
                 .setDirection(ShadowDirection.ALL)
-                .setShadowSize(dip2Px(12))
-                .setCorner(dip2Px(4))
+                .setShadowSize(dip2Px(4))
+                .setCorner(dip2Px(2))
                 .setBaseShadowColor(Color.parseColor("#ff4444"))
                 .setImpl(SuperShadow.DRAW_RENDERER)
                 .action(titleViewTv);
