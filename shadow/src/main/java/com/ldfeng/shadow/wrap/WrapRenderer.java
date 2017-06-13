@@ -30,16 +30,11 @@ public class WrapRenderer implements IShadowRenderer{
 
     private Drawable orignalDrawable;
 
-    private OnMeasureListener measureListener;
-
     private ShadowAttr attr;
-
-    private boolean init;
 
     public WrapRenderer(Context context, ShadowAttr attr) {
         this.context = context;
         this.attr = attr;
-        measureListener = new OnMeasureListener();
     }
 
     private void prepareLayout() {
@@ -126,20 +121,20 @@ public class WrapRenderer implements IShadowRenderer{
                 .setCornerRadius(attr.getCorner())
                 .setShadowRadius(attr.getShadowSize());
 
-        if (attr.containLeft())
-            decorateLeft(edgeShadowBuilder);
+        if (attr.containsLeft())
+            drawLeftEdge(edgeShadowBuilder);
 
-        if (attr.containTop())
-            decorateTop(edgeShadowBuilder);
+        if (attr.containsTop())
+            drawTopEdge(edgeShadowBuilder);
 
-        if (attr.containRight())
-            decorateRight(edgeShadowBuilder);
+        if (attr.containsRight())
+            drawRightEdge(edgeShadowBuilder);
 
-        if (attr.containBottom())
-            decorateBottom(edgeShadowBuilder);
+        if (attr.containsBottom())
+            drawBottomEdge(edgeShadowBuilder);
     }
 
-    private void decorateLeft(EdgeShadowView.Builder edgeShadowBuilder) {
+    private void drawLeftEdge(EdgeShadowView.Builder edgeShadowBuilder) {
         RelativeLayout.LayoutParams leftRlp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         float shadowSize;
         if (attr.getDirection() == ShadowDirection.LEFT) {
@@ -164,7 +159,7 @@ public class WrapRenderer implements IShadowRenderer{
         shadowLayout.addView(leftEdgeShadow, leftRlp);
     }
 
-    private void decorateTop(EdgeShadowView.Builder edgeShadowBuilder) {
+    private void drawTopEdge(EdgeShadowView.Builder edgeShadowBuilder) {
         RelativeLayout.LayoutParams topRlp = new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         float shadowSize;
@@ -190,7 +185,7 @@ public class WrapRenderer implements IShadowRenderer{
         shadowLayout.addView(topEdgeShadow, topRlp);
     }
 
-    private void decorateRight(EdgeShadowView.Builder edgeShadowBuilder) {
+    private void drawRightEdge(EdgeShadowView.Builder edgeShadowBuilder) {
         RelativeLayout.LayoutParams rightRlp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         rightRlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         float shadowSize;
@@ -216,7 +211,7 @@ public class WrapRenderer implements IShadowRenderer{
         shadowLayout.addView(rightEdgeShadow, rightRlp);
     }
 
-    private void decorateBottom(EdgeShadowView.Builder edgeShadowBuilder) {
+    private void drawBottomEdge(EdgeShadowView.Builder edgeShadowBuilder) {
         RelativeLayout.LayoutParams bottomRlp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         bottomRlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         float shadowSize;
@@ -249,20 +244,20 @@ public class WrapRenderer implements IShadowRenderer{
                 .setShadowSize(attr.getShadowSize())
                 .setCornerRadius(attr.getCorner());
 
-        if (attr.containLeft() && attr.containTop())
-            decorateLeftTop(cornerShadowBuilder);
+        if (attr.containsLeft() && attr.containsTop())
+            drawLeftTopCorner(cornerShadowBuilder);
 
-        if (attr.containRight() && attr.containTop())
-            decorateRightTop(cornerShadowBuilder);
+        if (attr.containsRight() && attr.containsTop())
+            drawRightTopCorner(cornerShadowBuilder);
 
-        if (attr.containRight() && attr.containBottom())
-            decorateRightBottom(cornerShadowBuilder);
+        if (attr.containsRight() && attr.containsBottom())
+            drawRightBottomCorner(cornerShadowBuilder);
 
-        if (attr.containLeft() && attr.containBottom())
-            decorateLeftBottom(cornerShadowBuilder);
+        if (attr.containsLeft() && attr.containsBottom())
+            drawLeftBottomCorner(cornerShadowBuilder);
     }
 
-    private void decorateLeftTop(CornerShadowView.Builder cornerShadowBuilder) {
+    private void drawLeftTopCorner(CornerShadowView.Builder cornerShadowBuilder) {
         CornerShadowView leftTopCornerShadow = cornerShadowBuilder
                 .setDirection(ShadowDirection.LEFT_TOP)
                 .create();
@@ -273,7 +268,7 @@ public class WrapRenderer implements IShadowRenderer{
         shadowLayout.addView(leftTopCornerShadow, leftTopRlp);
     }
 
-    private void decorateRightTop(CornerShadowView.Builder cornerShadowbuilder) {
+    private void drawRightTopCorner(CornerShadowView.Builder cornerShadowbuilder) {
         CornerShadowView rightTopCornerShadow = cornerShadowbuilder
                 .setDirection(ShadowDirection.TOP_RIGHT)
                 .create();
@@ -284,7 +279,7 @@ public class WrapRenderer implements IShadowRenderer{
         shadowLayout.addView(rightTopCornerShadow, rightTopRlp);
     }
 
-    private void decorateRightBottom(CornerShadowView.Builder cornerShadowbuilder) {
+    private void drawRightBottomCorner(CornerShadowView.Builder cornerShadowbuilder) {
         CornerShadowView RightBottomCornerShadow = cornerShadowbuilder
                 .setDirection(ShadowDirection.RIGHT_BOTTOM)
                 .create();
@@ -295,7 +290,7 @@ public class WrapRenderer implements IShadowRenderer{
         shadowLayout.addView(RightBottomCornerShadow, rightBottomRlp);
     }
 
-    private void decorateLeftBottom(CornerShadowView.Builder cornerShadowbuilder) {
+    private void drawLeftBottomCorner(CornerShadowView.Builder cornerShadowbuilder) {
         CornerShadowView leftBottomCornerShadow = cornerShadowbuilder
                 .setDirection(ShadowDirection.BOTTOM_LEFT)
                 .create();
@@ -309,12 +304,12 @@ public class WrapRenderer implements IShadowRenderer{
     @Override
     public void makeShadow(View view) {
         contentView = view;
-        init = true;
         if (attr.getBackground() != 0) {
             orignalDrawable = contentView.getBackground();
             contentView.setBackgroundColor(attr.getBackground());
         }
-        contentView.getViewTreeObserver().addOnGlobalLayoutListener(measureListener);
+        prepareLayout();
+        addShadow();
     }
 
     @Override
@@ -361,19 +356,6 @@ public class WrapRenderer implements IShadowRenderer{
             child = shadowLayout.getChildAt(i);
             if (child instanceof EdgeShadowView || child instanceof CornerShadowView) {
                 child.setAlpha(alpha);
-            }
-        }
-    }
-
-    private class OnMeasureListener implements ViewTreeObserver.OnGlobalLayoutListener {
-
-        @Override
-        public void onGlobalLayout() {
-            if (init) {
-                prepareLayout();
-                addShadow();
-                init = false;
-                contentView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
             }
         }
     }

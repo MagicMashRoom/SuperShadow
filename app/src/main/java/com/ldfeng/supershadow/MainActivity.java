@@ -15,6 +15,8 @@ import com.ldfeng.shadow.SuperShadow;
 import com.ldfeng.shadow.componet.Direction;
 import com.ldfeng.shadow.componet.ShadowDirection;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Context context;
@@ -29,14 +31,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private View shadowView0, shadowView1;
 
-    private SuperShadow titleCrazyShadow;
+    private SuperShadow superShadowTitle;
 
     private SuperShadow drawCrazyShadow0, drawCrazyShadow1;
 
 
     private SuperShadow wrapCrazyShadow0, wrapCrazyShadow1;
 
-    private SuperShadow shadowCrazyShadow0, shadowCrazyShadow1;
+    private SuperShadow shadowCrazyShadow0, superShadowExample;
 
     private boolean titleFlag = true, draw0Flag = true, draw1Flag = true;
 
@@ -50,7 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private CheckBox bottom;
 
-    private Direction direction  = new Direction(0 , 0);
+    private ArrayList<Direction> directions = new ArrayList<>();
+
+    private int shadowDirection = ShadowDirection.NONE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,21 +83,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         left.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                if(isChecked) {
+                    directions.add(Direction.LEFT);
+                } else {
+                    directions.remove(Direction.LEFT);
+                }
+                changeDirection();
             }
         });
 
         top.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                if(isChecked) {
+                    directions.add(Direction.TOP);
+                } else {
+                    directions.remove(Direction.TOP);
+                }
+                changeDirection();
             }
         });
 
         right.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                if(isChecked) {
+                    directions.add(Direction.RIGHT);
+                } else {
+                    directions.remove(Direction.RIGHT);
+                }
+                changeDirection();
             }
         });
 
@@ -101,12 +120,193 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-
+                    directions.add(Direction.BOTTOM);
                 } else {
-
+                    directions.remove(Direction.BOTTOM);
                 }
+                changeDirection();
             }
         });
+    }
+
+    private void changeDirection() {
+        switch (directions.size()) {
+            case 0:
+                superShadowExample.hide();
+                break;
+            case 1:
+                if(directions.contains(Direction.LEFT)) {
+                    superShadowExample = new SuperShadow.Builder()
+                            .setContext(this)
+                            .setDirection(ShadowDirection.LEFT)
+                            .setShadowSize(dip2Px(12))
+                            .setCorner(dip2Px(4))
+                            .setBaseShadowColor(Color.parseColor("#99cc00"))
+                            .setImpl(SuperShadow.WRAP)
+                            .action(shadowView1);
+                }
+                if(directions.contains(Direction.TOP)) {
+                    superShadowExample = new SuperShadow.Builder()
+                            .setContext(this)
+                            .setDirection(ShadowDirection.TOP)
+                            .setShadowSize(dip2Px(12))
+                            .setCorner(dip2Px(4))
+                            .setBaseShadowColor(Color.parseColor("#99cc00"))
+                            .setImpl(SuperShadow.WRAP)
+                            .action(shadowView1);
+                }
+                if(directions.contains(Direction.RIGHT)) {
+                    superShadowExample = new SuperShadow.Builder()
+                            .setContext(this)
+                            .setDirection(ShadowDirection.RIGHT)
+                            .setShadowSize(dip2Px(12))
+                            .setCorner(dip2Px(4))
+                            .setBaseShadowColor(Color.parseColor("#99cc00"))
+                            .setImpl(SuperShadow.WRAP)
+                            .action(shadowView1);
+                }
+                if(directions.contains(Direction.BOTTOM)) {
+                    superShadowExample = new SuperShadow.Builder()
+                            .setContext(this)
+                            .setDirection(ShadowDirection.BOTTOM)
+                            .setShadowSize(dip2Px(12))
+                            .setCorner(dip2Px(4))
+                            .setBaseShadowColor(Color.parseColor("#99cc00"))
+                            .setImpl(SuperShadow.WRAP)
+                            .action(shadowView1);
+                }
+                superShadowExample.show();
+                break;
+            case 2:
+                if(directions.contains(Direction.LEFT)) {
+                    if(directions.contains(Direction.TOP)) {
+                        superShadowExample = new SuperShadow.Builder()
+                                .setContext(this)
+                                .setDirection(ShadowDirection.LEFT_TOP)
+                                .setShadowSize(dip2Px(12))
+                                .setCorner(dip2Px(4))
+                                .setBaseShadowColor(Color.parseColor("#99cc00"))
+                                .setImpl(SuperShadow.WRAP)
+                                .action(shadowView1);
+                    } else {
+                        superShadowExample = new SuperShadow.Builder()
+                                .setContext(this)
+                                .setDirection(ShadowDirection.LEFT_RIGHT)
+                                .setShadowSize(dip2Px(12))
+                                .setCorner(dip2Px(4))
+                                .setBaseShadowColor(Color.parseColor("#99cc00"))
+                                .setImpl(SuperShadow.WRAP)
+                                .action(shadowView1);
+                    }
+                }
+
+                if(directions.contains(Direction.TOP)) {
+                    if(directions.contains(Direction.RIGHT)) {
+                        superShadowExample = new SuperShadow.Builder()
+                                .setContext(this)
+                                .setDirection(ShadowDirection.TOP_RIGHT)
+                                .setShadowSize(dip2Px(12))
+                                .setCorner(dip2Px(4))
+                                .setBaseShadowColor(Color.parseColor("#99cc00"))
+                                .setImpl(SuperShadow.WRAP)
+                                .action(shadowView1);
+                    } else {
+                        superShadowExample = new SuperShadow.Builder()
+                                .setContext(this)
+                                .setDirection(ShadowDirection.TOP_BOTTOM)
+                                .setShadowSize(dip2Px(12))
+                                .setCorner(dip2Px(4))
+                                .setBaseShadowColor(Color.parseColor("#99cc00"))
+                                .setImpl(SuperShadow.WRAP)
+                                .action(shadowView1);
+                    }
+                }
+
+                if(directions.contains(Direction.RIGHT)) {
+                    if(directions.contains(Direction.BOTTOM)) {
+                        superShadowExample = new SuperShadow.Builder()
+                                .setContext(this)
+                                .setDirection(ShadowDirection.RIGHT_BOTTOM)
+                                .setShadowSize(dip2Px(12))
+                                .setCorner(dip2Px(4))
+                                .setBaseShadowColor(Color.parseColor("#99cc00"))
+                                .setImpl(SuperShadow.WRAP)
+                                .action(shadowView1);
+                    }
+                }
+
+                if(directions.contains(Direction.BOTTOM)) {
+                    if(directions.contains(Direction.LEFT)) {
+                        superShadowExample = new SuperShadow.Builder()
+                                .setContext(this)
+                                .setDirection(ShadowDirection.BOTTOM_LEFT)
+                                .setShadowSize(dip2Px(12))
+                                .setCorner(dip2Px(4))
+                                .setBaseShadowColor(Color.parseColor("#99cc00"))
+                                .setImpl(SuperShadow.WRAP)
+                                .action(shadowView1);
+                    }
+                }
+                superShadowExample.show();
+
+                break;
+            case 3:
+                if(!directions.contains(Direction.LEFT)) {
+                    superShadowExample = new SuperShadow.Builder()
+                            .setContext(this)
+                            .setDirection(ShadowDirection.TOP_RIGHT_BOTTOM)
+                            .setShadowSize(dip2Px(12))
+                            .setCorner(dip2Px(4))
+                            .setBaseShadowColor(Color.parseColor("#99cc00"))
+                            .setImpl(SuperShadow.WRAP)
+                            .action(shadowView1);
+                }
+                if(!directions.contains(Direction.TOP)) {
+                    superShadowExample = new SuperShadow.Builder()
+                            .setContext(this)
+                            .setDirection(ShadowDirection.RIGHT_BOTTOM_LEFT)
+                            .setShadowSize(dip2Px(12))
+                            .setCorner(dip2Px(4))
+                            .setBaseShadowColor(Color.parseColor("#99cc00"))
+                            .setImpl(SuperShadow.WRAP)
+                            .action(shadowView1);
+                }
+                if(!directions.contains(Direction.RIGHT)) {
+                    superShadowExample = new SuperShadow.Builder()
+                            .setContext(this)
+                            .setDirection(ShadowDirection.BOTTOM_LEFT_TOP)
+                            .setShadowSize(dip2Px(12))
+                            .setCorner(dip2Px(4))
+                            .setBaseShadowColor(Color.parseColor("#99cc00"))
+                            .setImpl(SuperShadow.WRAP)
+                            .action(shadowView1);
+                }
+                if(!directions.contains(Direction.BOTTOM)) {
+                    superShadowExample = new SuperShadow.Builder()
+                            .setContext(this)
+                            .setDirection(ShadowDirection.LEFT_TOP_RIGHT)
+                            .setShadowSize(dip2Px(12))
+                            .setCorner(dip2Px(4))
+                            .setBaseShadowColor(Color.parseColor("#99cc00"))
+                            .setImpl(SuperShadow.WRAP)
+                            .action(shadowView1);
+                }
+                superShadowExample.show();
+
+                break;
+            case 4:
+                superShadowExample = new SuperShadow.Builder()
+                        .setContext(this)
+                        .setDirection(ShadowDirection.ALL)
+                        .setShadowSize(dip2Px(12))
+                        .setCorner(dip2Px(4))
+                        .setBaseShadowColor(Color.parseColor("#99cc00"))
+                        .setImpl(SuperShadow.WRAP)
+                        .action(shadowView1);
+                superShadowExample.show();
+
+                break;
+        }
     }
 
     @Override
@@ -114,9 +314,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.relay_title:
                 if (titleFlag) {
-                    titleCrazyShadow.hide();
+                    superShadowTitle.hide();
                 } else {
-                    titleCrazyShadow.show();
+                    superShadowTitle.show();
                 }
                 titleFlag = !titleFlag;
                 break;
@@ -163,38 +363,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.relay_shadow1:
                 if (shadow1Flag) {
-                    shadowCrazyShadow1.hide();
+                    superShadowExample.hide();
                 } else {
-                    shadowCrazyShadow1.show();
-                }
-                shadow1Flag = !shadow1Flag;
-                break;
-            case R.id.left_direction:
-                if(direction ==) {
-
-                }
-                break;
-            case R.id.top_direction:
-                if (shadow1Flag) {
-                    shadowCrazyShadow1.hide();
-                } else {
-                    shadowCrazyShadow1.show();
-                }
-                shadow1Flag = !shadow1Flag;
-                break;
-            case R.id.right_direction:
-                if (shadow1Flag) {
-                    shadowCrazyShadow1.hide();
-                } else {
-                    shadowCrazyShadow1.show();
-                }
-                shadow1Flag = !shadow1Flag;
-                break;
-            case R.id.bottom_direction:
-                if (shadow1Flag) {
-                    shadowCrazyShadow1.hide();
-                } else {
-                    shadowCrazyShadow1.show();
+                    superShadowExample.show();
                 }
                 shadow1Flag = !shadow1Flag;
                 break;
@@ -203,64 +374,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initShadow() {
-        titleCrazyShadow = new SuperShadow.Builder()
+        superShadowTitle = new SuperShadow.Builder()
                 .setContext(this)
                 .setDirection(ShadowDirection.ALL)
                 .setShadowSize(dip2Px(4))
                 .setCorner(dip2Px(2))
                 .setBaseShadowColor(Color.parseColor("#ff4444"))
-                .setImpl(SuperShadow.DRAW_RENDERER)
+                .setImpl(SuperShadow.DRAW)
                 .action(titleViewTv);
-//
-//        drawCrazyShadow0 = new SuperShadow.Builder()
-//                .setContext(this)
-//                .setDirection(ShadowDirection.ALL)
-//                .setShadowSize(dip2Px(12))
-//                .setBaseShadowColor(Color.RED)
-//                .setImpl(SuperShadow.DRAW_RENDERER)
-//                .action(drawView);
-//
-//        drawCrazyShadow1 = new SuperShadow.Builder()
-//                .setContext(this)
-//                .setDirection(ShadowDirection.ALL)
-//                .setShadowSize(dip2Px(3))
-//                .setCorner(dip2Px(5))
-//                .setBackground(Color.parseColor("#96a993"))
-//                .setImpl(SuperShadow.DRAW_RENDERER)
-//                .action(drawRoundView);
-//
-//        wrapCrazyShadow0 = new SuperShadow.Builder()
-//                .setContext(this)
-//                .setDirection(ShadowDirection.ALL)
-//                .setShadowSize(dip2Px(3))
-//                .setImpl(SuperShadow.WRAP_RENDERER)
-//                .action(wrapView0);
-//
-//        wrapCrazyShadow1 = new SuperShadow.Builder()
-//                .setContext(this)
-//                .setDirection(ShadowDirection.ALL)
-//                .setShadowSize(dip2Px(5))
-//                .setCorner(dip2Px(8))
-//                .setImpl(SuperShadow.WRAP_RENDERER)
-//                .action(wrapView1);
-//
-//        shadowCrazyShadow0 = new SuperShadow.Builder()
-//                .setContext(this)
-//                .setDirection(ShadowDirection.ALL)
-//                .setShadowSize(dip2Px(4))
-//                .setBackground(Color.parseColor("#a0a0a0"))
-//                .setBaseShadowColor(Color.parseColor("#a0a0a0"))
-//                .setImpl(SuperShadow.WRAP_RENDERER)
-//                .action(findViewById(R.id.relay_shadow0));
-//
-        shadowCrazyShadow1 = new SuperShadow.Builder()
-                .setContext(this)
-                .setDirection(ShadowDirection.TOP)
-                .setShadowSize(dip2Px(12))
-                .setCorner(dip2Px(4))
-                .setBaseShadowColor(Color.parseColor("#99cc00"))
-                .setImpl(SuperShadow.WRAP_RENDERER)
-                .action(findViewById(R.id.relay_shadow1));
 
     }
 
@@ -273,6 +394,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         wrapView1 = findViewById(R.id.relay_wrap1);
         shadowView0 = findViewById(R.id.relay_shadow0);
         shadowView1 = findViewById(R.id.relay_shadow1);
+        left = (CheckBox) findViewById(R.id.left_direction);
+        top = (CheckBox) findViewById(R.id.top_direction);
+        right = (CheckBox) findViewById(R.id.right_direction);
+        bottom = (CheckBox) findViewById(R.id.bottom_direction);
     }
 
 

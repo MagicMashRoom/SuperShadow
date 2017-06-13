@@ -33,4 +33,10 @@ public class Direction {
         }
         return false;
     }
+
+    public static Direction LEFT = new Direction(0 ,1);
+    public static Direction TOP = new Direction(1 ,0);
+    public static Direction RIGHT = new Direction(0 ,-1);
+    public static Direction BOTTOM = new Direction(-1 ,0);
+
 }

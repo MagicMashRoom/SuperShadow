@@ -21,12 +21,12 @@ public class SuperShadow {
      * 以 {@link android.view.View#setBackground(Drawable)} 的形式为你的
      * View 添加阴影背景，同时可以设置圆角 [{@link com.ldfeng.shadow.draw.DrawRenderer}]
      */
-    public static final String DRAW_RENDERER = "drawer";
+    public static final String DRAW = "drawer";
 
     /**
      * 以包装的形式为你的 View 添加阴影 [{@link com.ldfeng.shadow.wrap.WrapRenderer}]
      */
-    public static final String WRAP_RENDERER = "wrapper";
+    public static final String WRAP = "wrapper";
 
     private Context context;
 
@@ -39,9 +39,9 @@ public class SuperShadow {
     }
 
     private void createShadowHandler(ShadowAttr attr) {
-        if (attr.getImpl().equals(DRAW_RENDERER)) {
+        if (attr.getImpl().equals(DRAW)) {
             renderer = new DrawRenderer(attr);
-        } else if (attr.getImpl().equals(WRAP_RENDERER)) {
+        } else if (attr.getImpl().equals(WRAP)) {
             renderer = new WrapRenderer(context, attr);
         }
     }
@@ -86,8 +86,8 @@ public class SuperShadow {
         private Context context;
 
         /**
-         * {@link #DRAW_RENDERER} <br/>
-         * {@link #WRAP_RENDERER} <br/>
+         * {@link #DRAW} <br/>
+         * {@link #WRAP} <br/>
          */
         private String impl;
 
@@ -107,8 +107,8 @@ public class SuperShadow {
         private int[] colors;
 
         /**
-         * 对 {@link #DRAW_RENDERER} 形式表示为背景的圆角角度.<br/>
-         * 对 {@link #WRAP_RENDERER}
+         * 对 {@link #DRAW} 形式表示为背景的圆角角度.<br/>
+         * 对 {@link #WRAP}
          * 表示为阴影顶点的内侧弧度。以适配被设置的 View 是圆角的情况
          */
         private float corner;
@@ -131,8 +131,8 @@ public class SuperShadow {
 
         /**
          *  以何种方式添加阴影:<br/>
-         * {@link #DRAW_RENDERER} <br/>
-         * {@link #WRAP_RENDERER} <br/>
+         * {@link #DRAW} <br/>
+         * {@link #WRAP} <br/>
          * @param impl
          * @return Builder
          */
@@ -173,8 +173,8 @@ public class SuperShadow {
         }
 
         /**
-         * 对 {@link #DRAW_RENDERER} 形式表示为背景的圆角角度.<br/>
-         * 对 {@link #WRAP_RENDERER}
+         * 对 {@link #DRAW} 形式表示为背景的圆角角度.<br/>
+         * 对 {@link #WRAP}
          * 表示为阴影顶点的内侧弧度。以适配被设置的 View 是圆角的情况
          * @param corner [unit : pixels]
          * @return Builder

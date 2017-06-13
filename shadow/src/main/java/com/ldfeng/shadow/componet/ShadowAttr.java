@@ -9,8 +9,8 @@ import android.support.v4.graphics.ColorUtils;
 public class ShadowAttr {
     /**
      * 以何种方式添加阴影:<br/>
-     * {@link com.ldfeng.shadow.SuperShadow#DRAW_RENDERER} <br/>
-     * {@link com.ldfeng.shadow.SuperShadow#WRAP_RENDERER} <br/>
+     * {@link com.ldfeng.shadow.SuperShadow#DRAW} <br/>
+     * {@link com.ldfeng.shadow.SuperShadow#WRAP} <br/>
      */
     private String impl;
 
@@ -21,7 +21,7 @@ public class ShadowAttr {
     private int baseShadowColor;
 
     /**
-     * 仅对 {@link com.ldfeng.shadow.SuperShadow#DRAW_RENDERER} 形式的方设置阴影时需要的属性
+     * 仅对 {@link com.ldfeng.shadow.SuperShadow#DRAW} 形式的方设置阴影时需要的属性
      */
     private int background;
 
@@ -101,7 +101,7 @@ public class ShadowAttr {
         this.direction = direction;
     }
 
-    public boolean containLeft() {
+    public boolean containsLeft() {
         return direction == ShadowDirection.ALL ||
                 direction == ShadowDirection.LEFT ||
                 direction == ShadowDirection.LEFT_TOP ||
@@ -112,7 +112,7 @@ public class ShadowAttr {
 
     }
 
-    public boolean containTop() {
+    public boolean containsTop() {
         return direction == ShadowDirection.ALL ||
                 direction == ShadowDirection.TOP ||
                 direction == ShadowDirection.LEFT_TOP ||
@@ -122,7 +122,7 @@ public class ShadowAttr {
                 direction == ShadowDirection.TOP_RIGHT_BOTTOM;
     }
 
-    public boolean containRight() {
+    public boolean containsRight() {
         return direction == ShadowDirection.ALL ||
                 direction == ShadowDirection.RIGHT ||
                 direction == ShadowDirection.TOP_RIGHT ||
@@ -132,7 +132,7 @@ public class ShadowAttr {
                 direction == ShadowDirection.RIGHT_BOTTOM_LEFT;
     }
 
-    public boolean containBottom() {
+    public boolean containsBottom() {
         return direction == ShadowDirection.ALL ||
                 direction == ShadowDirection.BOTTOM ||
                 direction == ShadowDirection.BOTTOM_LEFT ||
