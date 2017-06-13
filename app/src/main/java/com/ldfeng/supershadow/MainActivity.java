@@ -7,11 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.ldfeng.shadow.SuperShadow;
-import com.ldfeng.shadow.base.ShadowDirection;
+import com.ldfeng.shadow.componet.Direction;
+import com.ldfeng.shadow.componet.ShadowDirection;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -40,6 +42,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean wrap0Flag = true, wrap1Flag = true, shadow0Flag = true, shadow1Flag = true;
 
+    private CheckBox left;
+
+    private CheckBox top;
+
+    private CheckBox right;
+
+    private CheckBox bottom;
+
+    private Direction direction  = new Direction(0 , 0);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +76,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         wrapView1.setOnClickListener(this);
         shadowView0.setOnClickListener(this);
         shadowView1.setOnClickListener(this);
+        left.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
+
+        top.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
+
+        right.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
+
+        bottom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+
+                } else {
+
+                }
+            }
+        });
     }
 
     @Override
@@ -126,6 +169,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 shadow1Flag = !shadow1Flag;
                 break;
+            case R.id.left_direction:
+                if(direction ==) {
+
+                }
+                break;
+            case R.id.top_direction:
+                if (shadow1Flag) {
+                    shadowCrazyShadow1.hide();
+                } else {
+                    shadowCrazyShadow1.show();
+                }
+                shadow1Flag = !shadow1Flag;
+                break;
+            case R.id.right_direction:
+                if (shadow1Flag) {
+                    shadowCrazyShadow1.hide();
+                } else {
+                    shadowCrazyShadow1.show();
+                }
+                shadow1Flag = !shadow1Flag;
+                break;
+            case R.id.bottom_direction:
+                if (shadow1Flag) {
+                    shadowCrazyShadow1.hide();
+                } else {
+                    shadowCrazyShadow1.show();
+                }
+                shadow1Flag = !shadow1Flag;
+                break;
+
         }
     }
 

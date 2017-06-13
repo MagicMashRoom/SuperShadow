@@ -1,4 +1,4 @@
-package com.ldfeng.shadow.base.view;
+package com.ldfeng.shadow.componet.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,7 +9,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.view.View;
 
-import com.ldfeng.shadow.base.ShadowDirection;
+import com.ldfeng.shadow.componet.ShadowDirection;
 
 /**
  * Created by hitomi on 2016/10/18.

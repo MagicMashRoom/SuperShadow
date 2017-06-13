@@ -1,19 +1,10 @@
 package com.ldfeng.shadow.draw;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 
-import com.ldfeng.shadow.base.IShadowRenderer;
-import com.ldfeng.shadow.base.ShadowAttr;
+import com.ldfeng.shadow.componet.IShadowRenderer;
+import com.ldfeng.shadow.componet.ShadowAttr;
 
 /**
  * Created by ldf on 17/6/6.

@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 
-import com.ldfeng.shadow.base.IShadowRenderer;
-import com.ldfeng.shadow.base.ShadowAttr;
-import com.ldfeng.shadow.base.ShadowDirection;
-import com.ldfeng.shadow.base.view.CornerShadowView;
-import com.ldfeng.shadow.base.view.EdgeShadowView;
+import com.ldfeng.shadow.componet.IShadowRenderer;
+import com.ldfeng.shadow.componet.ShadowAttr;
+import com.ldfeng.shadow.componet.ShadowDirection;
+import com.ldfeng.shadow.componet.view.CornerShadowView;
+import com.ldfeng.shadow.componet.view.EdgeShadowView;
 
 /**
  * Created by ldf on 17/6/6.

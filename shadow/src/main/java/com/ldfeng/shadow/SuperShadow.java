@@ -4,9 +4,9 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-import com.ldfeng.shadow.base.IShadowRenderer;
-import com.ldfeng.shadow.base.ShadowAttr;
-import com.ldfeng.shadow.base.ShadowDirection;
+import com.ldfeng.shadow.componet.IShadowRenderer;
+import com.ldfeng.shadow.componet.ShadowAttr;
+import com.ldfeng.shadow.componet.ShadowDirection;
 import com.ldfeng.shadow.draw.DrawRenderer;
 import com.ldfeng.shadow.wrap.WrapRenderer;
 
