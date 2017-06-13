@@ -9,10 +9,10 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/relay_title"
+            android:id="@+id/relay_draw_shadow_view"
             android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="6.67dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="26.67dp"
             android:background="@android:color/holo_green_dark"
             android:layout_gravity="center_horizontal">
 
@@ -24,30 +24,14 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/title_background"/>
 
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.67dp"
-            android:layout_marginTop="6.67dp"
-            android:layout_marginBottom="6.67dp"
-            android:background="@android:color/darker_gray"/>
-
-        <RelativeLayout
-            android:id="@+id/relay_draw0"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:background="#d07784"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="直角drawable背景[修改了阴影色]" />
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Add Shadow for Single View"
+                android:textSize="12sp"
+                android:gravity="center"/>
 
         </RelativeLayout>
 
@@ -59,21 +43,21 @@
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
-            android:id="@+id/relay_draw1"
+            android:id="@+id/relay_draw_shadow_viewgroup"
             android:layout_width="280dp"
-            android:layout_height="80dp"
+            android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:background="#d07784"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
                 android:gravity="center"
-                android:text="圆角drawable背景[修改了背景色]" />
+                android:text="Add Shadow for ViewGroup"
+                android:textSize="12sp"/>
 
         </RelativeLayout>
 
@@ -85,7 +69,7 @@
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
-            android:id="@+id/relay_wrap0"
+            android:id="@+id/relay_wrap_shadow_example"
             android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
@@ -135,7 +119,7 @@
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
-            android:id="@+id/relay_shadow0"
+            android:id="@+id/change_shadow_color_example"
             android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
@@ -161,19 +145,21 @@
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
-            android:id="@+id/relay_shadow1"
+            android:id="@+id/change_wrap_shadow_direction_example"
             android:layout_width="280dp"
-            android:layout_height="80dp"
+            android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
             android:background="@android:color/holo_green_light">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="可指定阴影附加在 View 的方位" />
+                android:text="Change Direction of Shadow" />
 
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -193,7 +179,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="LEFT"/>
+                    android:text="LEFT"
+                    android:textSize="12sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -210,7 +197,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="TOP"/>
+                    android:text="TOP"
+                    android:textSize="12sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -226,7 +214,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="RIGHT"/>
+                    android:text="RIGHT"
+                    android:textSize="12sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -242,7 +231,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="BOTTOM"/>
+                    android:text="BOTTOM"
+                    android:textSize="12sp"/>
             </LinearLayout>
         </LinearLayout>
 
