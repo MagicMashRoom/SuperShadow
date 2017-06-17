@@ -1,7 +1,7 @@
 # SuperShadow
-
    SuperShadow 是一个专门为 View 添加阴影效果的库。 SuperShadow 支持自定义阴影实现方式、阴影颜色、阴影经度大小、阴影附加方位。
-#Example
+   
+# Example
 
 ![Example](http://upload-images.jianshu.io/upload_images/3874191-f746908bbeb2664b.gif?imageMogr2/auto-orient/strip)
 
