@@ -5,7 +5,7 @@
     android:layout_width="match_parent" >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -69,56 +69,6 @@
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
-            android:id="@+id/relay_wrap_shadow_example"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:background="#c376d0"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="包装式阴影，修改原 View 大小，并添加阴影效果"
-                android:textSize="10sp" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.67dp"
-            android:layout_marginTop="6.67dp"
-            android:layout_marginBottom="6.67dp"
-            android:background="@android:color/darker_gray"/>
-
-        <RelativeLayout
-            android:id="@+id/relay_wrap1"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/shape_wrap"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="包装式阴影，设置 shape_wrap （圆角） 的背景后，CrazyShadow可以设置圆角阴影以适配圆角的 drawable"
-                android:textSize="9sp"/>
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.67dp"
-            android:layout_marginTop="6.67dp"
-            android:layout_marginBottom="6.67dp"
-            android:background="@android:color/darker_gray"/>
-
-        <RelativeLayout
             android:id="@+id/change_shadow_color_example"
             android:layout_width="280dp"
             android:layout_height="80dp"
@@ -160,81 +110,73 @@
 
         </RelativeLayout>
 
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16.67dp">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <CheckBox
-                    android:id="@+id/left_direction"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="LEFT"
-                    android:textSize="12sp"/>
-            </LinearLayout>
+            android:layout_height="0.67dp"
+            android:layout_marginTop="6.67dp"
+            android:layout_marginBottom="6.67dp"
+            android:background="@android:color/darker_gray"/>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <CheckBox
-                    android:id="@+id/top_direction"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="TOP"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <CheckBox
-                    android:id="@+id/right_direction"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="RIGHT"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <CheckBox
-                    android:id="@+id/bottom_direction"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="BOTTOM"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/change_wrap_shadow_direction_example1"
+            android:layout_width="280dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/holo_green_light">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Change Direction of Shadow" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.67dp"
+            android:layout_marginTop="6.67dp"
+            android:layout_marginBottom="6.67dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:id="@+id/change_wrap_shadow_direction_example2"
+            android:layout_width="280dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/holo_green_light">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Change Direction of Shadow" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.67dp"
+            android:layout_marginTop="6.67dp"
+            android:layout_marginBottom="6.67dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:id="@+id/change_wrap_shadow_direction_example3"
+            android:layout_width="280dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/holo_green_light">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Change Direction of Shadow" />
+
+        </RelativeLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
