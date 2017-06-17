@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 
 import com.ldfeng.shadow.SuperShadow;
@@ -18,35 +19,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Context context;
 
-    private View viewDrawShadow;
-
     private ImageView drawShadowViewExample;
 
     private View drawShadowViewGroupExample;
 
-    private View wrapShadowDirectionExample,
-            wrapShadowDirectionExample1,
-            wrapShadowDirectionExample2,
-            wrapShadowDirectionExample3;
+    private View wrapShadowLeftExample;
+    private View wrapShadowLeftTopExample;
+    private View wrapShadowLeftTopRightExample;
+    private View wrapShadowAllExample;
+
+    private View changeShadowColor, changeShadowDirection;
 
     private SuperShadow superDrawShadowOnView;
 
     private SuperShadow superDrawShadowOnViewGroup;
 
-    private boolean titleFlag = true, draw0Flag = true;
+    private SuperShadow superWrapShadowDirectionExample;
+    private SuperShadow superWrapShadowDirectionExample1;
+    private SuperShadow superWrapShadowDirectionExample2;
+    private SuperShadow superWrapShadowDirectionExample3;
 
-    private boolean wrap0Flag = true,
-            wrap1Flag = true,
-            wrap2Flag = true,
-            wrap3Flag = true,
-            shadow0Flag = true,
-            shadow1Flag = true;
+    private boolean draw0Flag = true , draw1Flag = true;
+    ;
+    private boolean wrap0Flag = true, wrap1Flag = true, wrap2Flag = true, wrap3Flag = true;
 
     private int shadowDirection = ShadowDirection.NONE;
-    private SuperShadow superWrapShadowLeftExample;
-    private SuperShadow superWrapShadowLeftTopExample;
-    private SuperShadow superWrapShadowLeftTopRightExample;
-    private SuperShadow superWrapShadowAllExample;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,73 +56,107 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initListener() {
-        viewDrawShadow.setOnClickListener(this);
+        drawShadowViewExample.setOnClickListener(this);
         drawShadowViewGroupExample.setOnClickListener(this);
-        wrapShadowDirectionExample.setOnClickListener(this);
-        wrapShadowDirectionExample1.setOnClickListener(this);
-        wrapShadowDirectionExample2.setOnClickListener(this);
-        wrapShadowDirectionExample3.setOnClickListener(this);
+        wrapShadowLeftExample.setOnClickListener(this);
+        wrapShadowLeftTopExample.setOnClickListener(this);
+        wrapShadowLeftTopRightExample.setOnClickListener(this);
+        wrapShadowAllExample.setOnClickListener(this);
+        changeShadowColor.setOnClickListener(this);
+        changeShadowDirection.setOnClickListener(this);
 
     }
-
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.relay_draw_shadow_view:
-                if (titleFlag) {
+                if (draw0Flag) {
                     superDrawShadowOnView.hide();
                 } else {
                     superDrawShadowOnView.show();
                 }
-                titleFlag = !titleFlag;
+                draw0Flag = !draw0Flag;
                 break;
             case R.id.relay_draw_shadow_viewgroup:
-                if (draw0Flag) {
+                if (draw1Flag) {
                     superDrawShadowOnViewGroup.hide();
                 } else {
                     superDrawShadowOnViewGroup.show();
                 }
-                draw0Flag = !draw0Flag;
+                draw1Flag = !draw1Flag;
                 break;
-
-            case R.id.change_wrap_shadow_direction_example:
+            case R.id.wrap_shadow_direction_example:
+                if(superWrapShadowDirectionExample == null) {
+                    superWrapShadowDirectionExample = new SuperShadow.Builder()
+                            .setContext(this)
+                            .setDirection(ShadowDirection.LEFT)
+                            .setShadowSize(dip2Px(8))
+                            .setCorner(dip2Px(4))
+                            .setBaseShadowColor(Color.parseColor("#99cc00"))
+                            .setImpl(SuperShadow.WRAP)
+                            .action(wrapShadowLeftExample);
+                }
                 if (wrap0Flag) {
-                    superWrapShadowLeftExample.hide();
+                    superWrapShadowDirectionExample.hide();
                 } else {
-                    superWrapShadowLeftExample.show();
+                    superWrapShadowDirectionExample.show();
                 }
                 wrap0Flag = !wrap0Flag;
                 break;
-            case R.id.change_wrap_shadow_direction_example1:
+            case R.id.wrap_shadow_direction_example1:
+                if(superWrapShadowDirectionExample1 == null) {
+                    superWrapShadowDirectionExample1 = new SuperShadow.Builder()
+                            .setContext(this)
+                            .setDirection(ShadowDirection.LEFT_TOP)
+                            .setShadowSize(dip2Px(8))
+                            .setCorner(dip2Px(4))
+                            .setBaseShadowColor(Color.parseColor("#99cc00"))
+                            .setImpl(SuperShadow.WRAP)
+                            .action(wrapShadowLeftTopExample);
+                }
                 if (wrap1Flag) {
-                    superWrapShadowLeftTopExample.hide();
+                    superWrapShadowDirectionExample1.hide();
                 } else {
-                    superWrapShadowLeftTopExample.show();
+                    superWrapShadowDirectionExample1.show();
                 }
                 wrap1Flag = !wrap1Flag;
                 break;
-            case R.id.change_wrap_shadow_direction_example2:
+            case R.id.wrap_shadow_direction_example2:
+                if(superWrapShadowDirectionExample2 == null) {
+                    superWrapShadowDirectionExample2 = new SuperShadow.Builder()
+                            .setContext(this)
+                            .setDirection(ShadowDirection.LEFT_TOP_RIGHT)
+                            .setShadowSize(dip2Px(8))
+                            .setCorner(dip2Px(4))
+                            .setBaseShadowColor(Color.parseColor("#99cc00"))
+                            .setImpl(SuperShadow.WRAP)
+                            .action(wrapShadowLeftTopRightExample);
+                }
                 if (wrap2Flag) {
-                    superWrapShadowLeftTopRightExample.hide();
+                    superWrapShadowDirectionExample2.hide();
                 } else {
-                    superWrapShadowLeftTopRightExample.show();
+                    superWrapShadowDirectionExample2.show();
                 }
                 wrap2Flag = !wrap2Flag;
                 break;
-            case R.id.change_wrap_shadow_direction_example3:
+            case R.id.wrap_shadow_direction_example3:
+                if(superWrapShadowDirectionExample3 == null) {
+                    superWrapShadowDirectionExample3 = new SuperShadow.Builder()
+                            .setContext(this)
+                            .setDirection(ShadowDirection.ALL)
+                            .setShadowSize(dip2Px(8))
+                            .setCorner(dip2Px(4))
+                            .setBaseShadowColor(Color.parseColor("#99cc00"))
+                            .setImpl(SuperShadow.WRAP)
+                            .action(wrapShadowAllExample);
+                }
                 if (wrap3Flag) {
-                    superWrapShadowAllExample.hide();
+                    superWrapShadowDirectionExample3.hide();
                 } else {
-                    superWrapShadowAllExample.show();
+                    superWrapShadowDirectionExample3.show();
                 }
                 wrap3Flag = !wrap3Flag;
-                break;
-            case R.id.change_shadow_color_example:
-                if (shadow0Flag) {
-                } else {
-                }
-                shadow0Flag = !shadow0Flag;
                 break;
         }
     }
@@ -147,51 +178,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setBaseShadowColor(Color.parseColor("#ff4444"))
                 .setImpl(SuperShadow.DRAW)
                 .action(drawShadowViewGroupExample);
-        superWrapShadowLeftExample = new SuperShadow.Builder()
-                .setContext(this)
-                .setDirection(ShadowDirection.LEFT)
-                .setShadowSize(dip2Px(12))
-                .setCorner(dip2Px(4))
-                .setBaseShadowColor(Color.parseColor("#99cc00"))
-                .setImpl(SuperShadow.WRAP)
-                .action(wrapShadowDirectionExample);
-//        superWrapShadowLeftTopExample = new SuperShadow.Builder()
-//                .setContext(this)
-//                .setDirection(ShadowDirection.LEFT_TOP)
-//                .setShadowSize(dip2Px(12))
-//                .setCorner(dip2Px(4))
-//                .setBaseShadowColor(Color.parseColor("#99cc00"))
-//                .setImpl(SuperShadow.WRAP)
-//                .action(wrapShadowDirectionExample1);
-//
-//        superWrapShadowLeftTopRightExample = new SuperShadow.Builder()
-//                .setContext(this)
-//                .setDirection(ShadowDirection.LEFT_TOP_RIGHT)
-//                .setShadowSize(dip2Px(12))
-//                .setCorner(dip2Px(4))
-//                .setBaseShadowColor(Color.parseColor("#99cc00"))
-//                .setImpl(SuperShadow.WRAP)
-//                .action(wrapShadowDirectionExample2);
-//
-//        superWrapShadowAllExample = new SuperShadow.Builder()
-//                .setContext(this)
-//                .setDirection(ShadowDirection.LEFT_TOP_RIGHT)
-//                .setShadowSize(dip2Px(12))
-//                .setCorner(dip2Px(4))
-//                .setBaseShadowColor(Color.parseColor("#99cc00"))
-//                .setImpl(SuperShadow.WRAP)
-//                .action(wrapShadowDirectionExample3);
-
     }
 
     private void initView() {
-        viewDrawShadow = findViewById(R.id.relay_draw_shadow_view);
-        drawShadowViewExample = (ImageView) findViewById(R.id.relay_title_tv);
+        drawShadowViewExample = (ImageView) findViewById(R.id.relay_draw_shadow_view);
         drawShadowViewGroupExample = findViewById(R.id.relay_draw_shadow_viewgroup);
-        wrapShadowDirectionExample = findViewById(R.id.change_wrap_shadow_direction_example);
-        wrapShadowDirectionExample1 = findViewById(R.id.change_wrap_shadow_direction_example1);
-        wrapShadowDirectionExample2 = findViewById(R.id.change_wrap_shadow_direction_example2);
-        wrapShadowDirectionExample3 = findViewById(R.id.change_wrap_shadow_direction_example3);
+
+
+        wrapShadowLeftExample = findViewById(R.id.wrap_shadow_direction_example);
+        wrapShadowLeftTopExample = findViewById(R.id.wrap_shadow_direction_example1);
+        wrapShadowLeftTopRightExample = findViewById(R.id.wrap_shadow_direction_example2);
+        wrapShadowAllExample = findViewById(R.id.wrap_shadow_direction_example3);
+
+        changeShadowColor = findViewById(R.id.change_shadow_color_example);
+        changeShadowDirection = findViewById(R.id.wrap_shadow_direction_example);
 
     }
 

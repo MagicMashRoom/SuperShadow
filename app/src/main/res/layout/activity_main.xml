@@ -9,7 +9,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/relay_draw_shadow_view"
+            android:id="@+id/relay_draw_shadow_content"
             android:layout_width="280dp"
             android:layout_height="120dp"
             android:layout_marginTop="26.67dp"
@@ -17,7 +17,7 @@
             android:layout_gravity="center_horizontal">
 
             <ImageView
-                android:id="@+id/relay_title_tv"
+                android:id="@+id/relay_draw_shadow_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
@@ -69,6 +69,56 @@
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
+            android:id="@+id/relay_wrap_shadow_example"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="#c376d0"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="包装式阴影，修改原 View 大小，并添加阴影效果"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.67dp"
+            android:layout_marginTop="6.67dp"
+            android:layout_marginBottom="6.67dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:id="@+id/relay_wrap1"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_wrap"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="包装式阴影，设置 shape_wrap （圆角） 的背景后，CrazyShadow可以设置圆角阴影以适配圆角的 drawable"
+                android:textSize="9sp"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.67dp"
+            android:layout_marginTop="6.67dp"
+            android:layout_marginBottom="6.67dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
             android:id="@+id/change_shadow_color_example"
             android:layout_width="280dp"
             android:layout_height="80dp"
@@ -95,7 +145,7 @@
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
-            android:id="@+id/change_wrap_shadow_direction_example"
+            android:id="@+id/wrap_shadow_direction_example"
             android:layout_width="280dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
@@ -118,7 +168,7 @@
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
-            android:id="@+id/change_wrap_shadow_direction_example1"
+            android:id="@+id/wrap_shadow_direction_example1"
             android:layout_width="280dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
@@ -141,7 +191,7 @@
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
-            android:id="@+id/change_wrap_shadow_direction_example2"
+            android:id="@+id/wrap_shadow_direction_example2"
             android:layout_width="280dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
@@ -164,11 +214,12 @@
             android:background="@android:color/darker_gray"/>
 
         <RelativeLayout
-            android:id="@+id/change_wrap_shadow_direction_example3"
+            android:id="@+id/wrap_shadow_direction_example3"
             android:layout_width="280dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@android:color/holo_green_light">
 
             <TextView
