@@ -28,10 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private View wrapShadowLeftTopRightExample;
     private View wrapShadowAllExample;
 
-    private View changeShadowColor, changeShadowDirection;
-
     private SuperShadow superDrawShadowOnView;
-
     private SuperShadow superDrawShadowOnViewGroup;
 
     private SuperShadow superWrapShadowDirectionExample;
@@ -62,9 +59,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         wrapShadowLeftTopExample.setOnClickListener(this);
         wrapShadowLeftTopRightExample.setOnClickListener(this);
         wrapShadowAllExample.setOnClickListener(this);
-        changeShadowColor.setOnClickListener(this);
-        changeShadowDirection.setOnClickListener(this);
-
     }
 
     @Override
@@ -189,10 +183,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         wrapShadowLeftTopExample = findViewById(R.id.wrap_shadow_direction_example1);
         wrapShadowLeftTopRightExample = findViewById(R.id.wrap_shadow_direction_example2);
         wrapShadowAllExample = findViewById(R.id.wrap_shadow_direction_example3);
-
-        changeShadowColor = findViewById(R.id.change_shadow_color_example);
-        changeShadowDirection = findViewById(R.id.wrap_shadow_direction_example);
-
     }
 
 
